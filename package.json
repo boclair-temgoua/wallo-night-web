@@ -7,7 +7,14 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
+  },  
+  "engines": {
+    "npm": ">=9.0.0 ",
+    "node": ">=18.0.0"
   },
+  "contributors": [
+    "Boclair Temgoua (https://github.com/boclair-temgoua)"
+  ],
   "dependencies": {
     "@ant-design/cssinjs": "^1.17.0",
     "@ant-design/icons": "^5.2.6",
