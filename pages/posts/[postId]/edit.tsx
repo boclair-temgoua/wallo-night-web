@@ -3,10 +3,7 @@ import LayoutDashboard from "@/components/layout-dashboard";
 import { CreateOrUpdateFormPost } from "@/components/post/create-or-update-form-post";
 import { useRouter } from "next/router";
 import { GetOnePostAPI } from "@/api-site/post";
-import { CreateOrUpdateFormAudioPost } from "@/components/post/create-or-update-form-audio-post";
-import { CreateOrUpdateFormVideoPost } from "@/components/post/create-or-update-form-video-post";
 import { useAuth } from "@/components/util/context-user";
-import { CreateOrUpdateFormGalleryPost } from "@/components/post/create-or-update-form-gallery-post";
 import { LoadingFile } from "@/components/ui/loading-file";
 
 const PostsCreate = () => {
@@ -26,41 +23,20 @@ const PostsCreate = () => {
   });
 
   const dataTablePost = isLoadingPost ? (
-      <LoadingFile />
-    ) : isErrorPost ? (
-      <strong>Error find data please try again...</strong>
-    ) : (
-      <>
-        {post?.id && type === "gallery" ? (
-          <CreateOrUpdateFormGalleryPost
-            uploadImages={post?.uploadsImage}
-            post={post} postId={postId} />
-        ) : null}
+    <LoadingFile />
+  ) : isErrorPost ? (
+    <strong>Error find data please try again...</strong>
+  ) : (
+    <>
 
-        {post?.id && type === "article" ? (
-          <CreateOrUpdateFormPost
-            uploadImages={post?.uploadsImage}
-            post={post} postId={postId}
-          />
-        ) : null}
-
-        {post?.id && type === "audio" ? (
-          <CreateOrUpdateFormAudioPost
-            post={post}
-            postId={postId}
-            uploadFiles={post?.uploadsFile}
-            uploadImages={post?.uploadsImage}
-          />
-        ) : null}
-
-        {post?.id && type === "video" ? (
-          <CreateOrUpdateFormVideoPost
-            uploadImages={post?.uploadsImage}
-            post={post} postId={postId}
-          />
-        ) : null}
-      </>
-    );
+      {post?.id && type === "article" ? (
+        <CreateOrUpdateFormPost
+          uploadImages={post?.uploadsImage}
+          post={post} postId={postId}
+        />
+      ) : null}
+    </>
+  );
 
   return (
     <>

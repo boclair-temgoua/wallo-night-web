@@ -33,14 +33,14 @@ const SUPPORT_ITEMS = [
     href: "/posts",
     icon: <BiDetail className={classIcon} />,
   },
-];
-
-const SETTINGS_ITEMS = [
   {
     title: "Event",
     href: "/events",
     icon: <BsShop className={classIcon} />,
   },
+];
+
+const SETTINGS_ITEMS = [
   {
     title: "Settings",
     href: "/settings",

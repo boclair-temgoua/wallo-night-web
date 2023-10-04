@@ -1,24 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { SubmitHandler, Controller } from "react-hook-form";
 import * as yup from "yup";
-import { DateInput, NumberInput, ReactQuillInput, TextInput } from "../ui";
+import { DateInput, NumberInput, ReactQuillInput, TextAreaInput, TextInput } from "../ui";
 import { ButtonInput } from "../ui/button-input";
-import { PostFormModel } from "@/types/post";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { CreateOrUpdateOnePostAPI, getCategoriesAPI } from "@/api-site/post";
 import { Upload, UploadFile, UploadProps } from "antd";
 import { PlusOutlined } from "@ant-design/icons";
-import { useQuery } from "@tanstack/react-query";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
 import { useAuth } from "../util/context-user";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
+import { CreateOrUpdateOneEventAPI } from "@/api-site/event";
+import { EventFormModel } from "@/types/event";
 
 type Props = {
   uploadImages?: any;
-  postId?: string;
-  post?: any;
+  eventId?: string;
+  event?: any;
 };
 
 const schema = yup.object({
@@ -27,12 +26,11 @@ const schema = yup.object({
   categories: yup.array().optional(),
 });
 
-const CreateOrUpdateFormPost: React.FC<Props> = ({
-  postId,
-  post,
+const CreateOrUpdateFormEvent: React.FC<Props> = ({
+  eventId,
+  event,
   uploadImages,
 }) => {
-  const { userStorage } = useAuth() as any;
   const router = useRouter();
 
   const [imageList, setImageList] = useState<UploadFile[]>(uploadImages ?? []);
@@ -48,18 +46,8 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
     setHasErrors,
   } = useReactHookForm({ schema });
 
-  const fetchCategories = async () => await getCategoriesAPI({ userId: "" });
-  const { data: dataCategories } = useQuery(
-    ["categories"],
-    () => fetchCategories(),
-    {
-      refetchOnWindowFocus: false,
-    }
-  );
-  const categories: any = dataCategories?.data;
-
   useEffect(() => {
-    if (post) {
+    if (event) {
       const fields = [
         "title",
         "description",
@@ -69,14 +57,15 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
         "address",
         "currency",
         "location",
+        "messageAfterPayment",
         "status"
       ];
-      fields?.forEach((field: any) => setValue(field, post[field]));
+      fields?.forEach((field: any) => setValue(field, event[field]));
     }
-  }, [post, postId, setValue]);
+  }, [event, eventId, setValue]);
 
   // Create or Update data
-  const saveMutation = CreateOrUpdateOnePostAPI({
+  const saveMutation = CreateOrUpdateOneEventAPI({
     onSuccess: () => {
       setHasErrors(false);
       setLoading(false);
@@ -87,8 +76,8 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
     },
   });
 
-  const onSubmit: SubmitHandler<PostFormModel> = async (
-    data: PostFormModel
+  const onSubmit: SubmitHandler<EventFormModel> = async (
+    data: EventFormModel
   ) => {
     setLoading(true);
     setHasErrors(undefined);
@@ -98,24 +87,23 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
       });
       const payload = {
         ...data,
+        currency: 'EUR',
         imageList,
         newImageLists,
       };
       await saveMutation.mutateAsync({
         ...payload,
-        type: "ARTICLE",
-        postId: post?.id,
-        whoCanSee: "PUBLIC"
+        eventId: event?.id,
       });
       setHasErrors(false);
       setLoading(false);
       AlertSuccessNotification({
-        text: "Article save successfully",
+        text: "Event save successfully",
         className: "info",
         gravity: "top",
         position: "center",
       });
-      router.push(`/posts`)
+      router.push(`/events`)
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -141,7 +129,7 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
             <div className="overflow-hidden bg-white border border-gray-200">
               <div className="px-4 py-5">
                 <h2 className="text-base font-bold text-gray-900">
-                  {post?.id ? "Update" : "Create a new"} article
+                  {event?.id ? "Update" : "Create a new"} event
                 </h2>
 
                 <div className="mt-4">
@@ -210,15 +198,6 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
 
                 <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
                   <div className="mt-2">
-                    <DateInput
-                      label="Date Event"
-                      control={control}
-                      placeholder="12/01/2023"
-                      name="dateEvent"
-                      errors={errors}
-                    />
-                  </div>
-                  <div className="mt-2">
                     <NumberInput
                       control={control}
                       label="Price"
@@ -230,12 +209,18 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                       prefix={'EUR'}
                     />
                   </div>
+                  <div className="mt-2">
+                    <DateInput
+                      label="Date Event"
+                      control={control}
+                      placeholder="12/01/2023"
+                      name="dateEvent"
+                      errors={errors}
+                    />
+                  </div>
                 </div>
 
-
-
-
-                <div className="mt-2">
+                <div className="mt-4">
                   <ReactQuillInput
                     control={control}
                     label="Description"
@@ -243,6 +228,20 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
                     placeholder="Write description"
                     errors={errors}
                   />
+                </div>
+
+                <div className="mt-2">
+                  <TextAreaInput
+                    row={3}
+                    control={control}
+                    label="Confirmation message"
+                    name="messageAfterPayment"
+                    placeholder="Success message confirmation"
+                    errors={errors}
+                  />
+                  <span className="text-sm font-medium text-gray-400">
+                    {`Buyers will see this message after payment. Use this to thank them, to give instructions or to give rewards.`}
+                  </span>
                 </div>
 
                 <div className="flex items-center mt-4 mb-4 space-x-4">
@@ -273,4 +272,4 @@ const CreateOrUpdateFormPost: React.FC<Props> = ({
   );
 };
 
-export { CreateOrUpdateFormPost };
+export { CreateOrUpdateFormEvent };

@@ -153,7 +153,7 @@ export const ValidCodeAPI = ({
 export const GetOneUserPrivateAPI = (payload: { userId: string }) => {
   const { userId } = payload;
   const { data, isError, isLoading, status } = useQuery({
-    queryKey: ["user", userId],
+    queryKey: ["user", userId, { preview: true }],
     queryFn: async () =>
       await makeApiCall({
         action: "getOneUserPrivate",

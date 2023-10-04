@@ -263,7 +263,7 @@ export const getOneFileGalleryAPI = (fileName: string) =>
 
 export const getPostsAPI = async (
   payload: {
-    userId: string;
+    organizationId: string;
     type?: PostType;
     status?: string;
     typeIds?: string[];
@@ -276,7 +276,7 @@ export const getPostsAPI = async (
 };
 
 export const GetInfinitePostsAPI = (payload: {
-  userId: string;
+  organizationId: string;
   take: number;
   status?: string;
   sort: SortModel;
@@ -284,13 +284,14 @@ export const GetInfinitePostsAPI = (payload: {
   typeIds?: string[];
   queryKey: string[];
 }) => {
-  const { userId, take, sort, status, type, typeIds, queryKey } = payload;
+  const { organizationId, take, sort, status, type, typeIds, queryKey } =
+    payload;
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 0 }) =>
       await getPostsAPI({
-        userId,
+        organizationId,
         take,
         sort,
         type,

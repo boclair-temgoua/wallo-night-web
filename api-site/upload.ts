@@ -3,7 +3,7 @@ import { makeApiCall } from "@/utils/get-url-end-point";
 import { useQuery } from "@tanstack/react-query";
 
 export const GetUploadsAPI = (payload: {
-  userId?: string;
+  organizationId?: string;
   model: string;
   uploadableId: string;
   uploadType?: "image" | "file";

@@ -142,33 +142,6 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/countries`,
     method: GET,
   },
-  /****************** Follows route */
-  getFollowers: {
-    endpoint: `${baseUrl}/follows/followers`,
-    method: GET,
-  },
-  getFollowings: {
-    endpoint: `${baseUrl}/follows/followings`,
-    method: GET,
-  },
-  createOneFollowers: {
-    endpoint: `${baseUrl}/follows/create/:followerId`,
-    method: POST,
-  },
-  deleteOneFollowers: {
-    endpoint: `${baseUrl}/follows/delete/:followerId`,
-    method: POST,
-  },
-
-  /****************** Like route */
-  createOneLike: {
-    endpoint: `${baseUrl}/likes/:type/:likeableId`,
-    method: POST,
-  },
-  deleteOneLike: {
-    endpoint: `${baseUrl}/likes/:type/:likeableId`,
-    method: DELETE,
-  },
 
   /****************** Comments route */
   getComments: {
@@ -196,28 +169,6 @@ export const apiEndpoints: ClientApiMethods = {
     method: DELETE,
   },
 
-  /****************** Discounts route */
-  getDiscountsUser: {
-    endpoint: `${baseUrl}/discounts/user`,
-    method: GET,
-  },
-  getDiscounts: {
-    endpoint: `${baseUrl}/discounts`,
-    method: GET,
-  },
-  createOneDiscount: {
-    endpoint: `${baseUrl}/discounts`,
-    method: POST,
-  },
-  updateOneDiscount: {
-    endpoint: `${baseUrl}/discounts/:discountId`,
-    method: PUT,
-  },
-  deleteOneDiscount: {
-    endpoint: `${baseUrl}/discounts/:discountId`,
-    method: DELETE,
-  },
-
   /****************** Categories route */
   getCategories: {
     endpoint: `${baseUrl}/categories`,
@@ -233,6 +184,7 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/uploads/update`,
     method: PUT,
   },
+
   /****************** Products route */
   getProducts: {
     endpoint: `${baseUrl}/products`,
@@ -255,47 +207,25 @@ export const apiEndpoints: ClientApiMethods = {
     method: DELETE,
   },
 
-  /****************** Commissions route */
-  getCommissions: {
-    endpoint: `${baseUrl}/commissions`,
+  /****************** Events route */
+  getEvents: {
+    endpoint: `${baseUrl}/events`,
     method: GET,
   },
-  getOneCommission: {
-    endpoint: `${baseUrl}/commissions/view`,
-    method: GET,
-  },
-  createOneCommission: {
-    endpoint: `${baseUrl}/commissions`,
+  createOneEvent: {
+    endpoint: `${baseUrl}/events`,
     method: POST,
   },
-  updateOneCommission: {
-    endpoint: `${baseUrl}/commissions/:commissionId`,
+  updateOneEvent: {
+    endpoint: `${baseUrl}/events/:eventId`,
     method: PUT,
   },
-  deleteOneCommission: {
-    endpoint: `${baseUrl}/commissions/:commissionId`,
-    method: DELETE,
-  },
-
-  /****************** Memberships route */
-  getMemberships: {
-    endpoint: `${baseUrl}/memberships`,
+  getOneEvent: {
+    endpoint: `${baseUrl}/events/show`,
     method: GET,
   },
-  getOneMembership: {
-    endpoint: `${baseUrl}/memberships/view`,
-    method: GET,
-  },
-  createOneMembership: {
-    endpoint: `${baseUrl}/memberships`,
-    method: POST,
-  },
-  updateOneMembership: {
-    endpoint: `${baseUrl}/memberships/:membershipId`,
-    method: PUT,
-  },
-  deleteOneMembership: {
-    endpoint: `${baseUrl}/memberships/:membershipId`,
+  deleteOneEvent: {
+    endpoint: `${baseUrl}/events/:eventId`,
     method: DELETE,
   },
 

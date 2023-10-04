@@ -1,34 +1,33 @@
 import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { Input, Spin } from "antd";
-import { GetInfinitePostsAPI } from "@/api-site/post";
+import { Input } from "antd";
 import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 import { useAuth } from "@/components/util/context-user";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { EmptyData } from "@/components/ui/empty-data";
-import ListPosts from "@/components/post/list-posts";
 import { ButtonInput } from "@/components/ui/button-input";
 import { LoadingFile } from "@/components/ui/loading-file";
+import { GetInfiniteEventsAPI } from "@/api-site/event";
+import { ListEvents } from "@/components/event/list-events";
 
-const Posts = () => {
+const Events = () => {
   const router = useRouter();
   const { ref, inView } = useInView();
   const { userStorage } = useAuth() as any;
 
   const {
-    isLoading: isLoadingGallery,
-    isError: isErrorGallery,
-    data: dataGallery,
+    isLoading: isLoadingEvent,
+    isError: isErrorEvent,
+    data: dataEvent,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
-  } = GetInfinitePostsAPI({
+  } = GetInfiniteEventsAPI({
     organizationId: userStorage?.organizationId,
     take: 10,
     sort: "DESC",
-    typeIds: ['ARTICLE', 'AUDIO', 'VIDEO'],
-    queryKey: ["posts", "infinite"],
+    queryKey: ["events", "infinite"],
   });
 
   useEffect(() => {
@@ -53,26 +52,26 @@ const Posts = () => {
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
-  const dataTablePosts = isLoadingGallery ? (
+  const dataTableEvents = isLoadingEvent ? (
     <LoadingFile />
-  ) : isErrorGallery ? (
+  ) : isErrorEvent ? (
     <strong>Error find data please try again...</strong>
-  ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
+  ) : dataEvent?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
       title="Add your first listing to get started"
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />
   ) : (
-    dataGallery.pages
+    dataEvent.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
-        <ListPosts item={item} key={index} index={index} />
+        <ListEvents item={item} key={index} index={index} />
       ))
   );
 
   return (
     <>
-      <LayoutDashboard title={"Posts"}>
+      <LayoutDashboard title={"Events"}>
         <div className="flex flex-col flex-1 bg-gray-100">
           <main>
             <div className="max-w-6xl mx-auto py-6">
@@ -88,24 +87,24 @@ const Posts = () => {
                       <div className="sm:flex sm:items-center sm:justify-between">
                         <div className="mt-4 sm:mt-0">
                           <ButtonInput
-                            onClick={() => router.push(`/posts/create?type=article`)}
+                            onClick={() => router.push(`/events/create`)}
                             shape="default"
                             type="button"
                             size="normal"
                             loading={false}
                             color={"indigo"}
                           >
-                            Create Post
+                            Create Event
                           </ButtonInput>
                         </div>
                         <div className="mt-4 sm:mt-0">
-                          <Input placeholder="Search post" />
+                          <Input placeholder="Search event" />
                         </div>
                       </div>
 
 
                       <div className="divide-y divide-gray-200">
-                        {dataTablePosts}
+                        {dataTableEvents}
                       </div>
 
                     </div>
@@ -140,4 +139,4 @@ const Posts = () => {
   );
 };
 
-export default PrivateComponent(Posts);
+export default PrivateComponent(Events);
