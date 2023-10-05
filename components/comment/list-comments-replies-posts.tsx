@@ -12,7 +12,6 @@ import {
 } from "@/utils";
 import { HtmlParser } from "@/utils/html-parser";
 import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
-import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 
 type Props = {
   item?: CommentModel;
@@ -92,7 +91,6 @@ const ListCommentsRepliesPosts: React.FC<Props> = ({ item, userId, index }) => {
           </p>
 
           <div className="flex mt-2 items-center">
-            <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
             {userId === item?.userId ? (
               <>

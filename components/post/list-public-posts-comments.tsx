@@ -11,7 +11,6 @@ import {
 } from "react-icons/md";
 import ReactPlayer from "react-player";
 import { getOneFileGalleryAPI } from "@/api-site/post";
-import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { HtmlParser } from "@/utils/html-parser";
 import { IoShareOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
@@ -118,7 +117,6 @@ const ListPublicPostsComments: React.FC<Props> = ({ item, commentTake }) => {
           </p>
 
           <div className="flex mt-4 items-center">
-            <CreateOrUpdateFormLike typeLike="POST" item={item} />
 
             <button className="ml-3.5 text-lg font-bold">
               <BiComment />

@@ -18,7 +18,6 @@ import ListCommentsRepliesPosts from "./list-comments-replies-posts";
 import { useAuth } from "../util/context-user";
 import { CreateOrUpdateFormComment } from "./create-or-update-form-comment";
 import { HtmlParser } from "@/utils/html-parser";
-import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { CreateOrUpdateFormCommentReply } from "./create-or-update-form-comment-reply";
 import { BsReplyAll } from "react-icons/bs";
 
@@ -133,7 +132,6 @@ const ListCommentsPosts: React.FC<Props> = ({ item, index }) => {
                 <HtmlParser html={String(item?.description)} />
               </p>
               <div className="flex mt-2 items-center">
-                <CreateOrUpdateFormLike typeLike="COMMENT" item={item} />
 
                 {user?.id ? (
                   <button

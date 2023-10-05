@@ -13,7 +13,6 @@ import {
 import ReactPlayer from "react-player";
 import { useRouter } from "next/router";
 import { getOneFileGalleryAPI } from "@/api-site/post";
-import { CreateOrUpdateFormLike } from "../like-follow/create-or-update-form-like";
 import { HtmlParser } from "@/utils/html-parser";
 import { IoShareOutline } from "react-icons/io5";
 import { FiDownload } from "react-icons/fi";
