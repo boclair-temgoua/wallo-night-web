@@ -9,7 +9,6 @@ import { ButtonInput } from "../ui/button-input";
 import { HtmlParser } from "@/utils/html-parser";
 import { ReadMore } from "@/utils/read-more";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
-import { CreateOrUpdateFormFollow } from "../like-follow/create-or-update-form-follow";
 
 const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
   const userVisiter = useAuth() as any;
@@ -76,17 +75,12 @@ const HorizontalNavPublicUser: React.FC<{ user: any }> = ({ user }) => {
                     <p className="mt-1 text-sm text-white"><ReadMore html={String(user?.profile?.url ?? '')} value={30} /></p>
                   ) : null}
                 </div>
-                {userVisiter?.id !== user?.id && (
-                  <div className="mt-4 sm:ml-auto sm:mt-0">
-                    <CreateOrUpdateFormFollow item={user} />
-                  </div>
-                )}
               </div>
             </div>
           </div>
         </div>
       </div>
-
+77419
       <div className="px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
         <div className="w-full pb-1 overflow-x-auto">
           <div className="border-b border-gray-200">

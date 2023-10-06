@@ -1,4 +1,4 @@
-import { createOnUploadPostAPI } from "@/api-site/post";
+
 import dynamic from "next/dynamic";
 import { useMemo, useRef } from "react";
 import { Control, Controller } from "react-hook-form";
@@ -50,12 +50,6 @@ const ReactQuillInput: React.FC<Props> = ({
       const quillObj = quillRef?.current?.getEditor();
       const range = quillObj?.getSelection();
 
-      if (file) {
-        data.append("image", file);
-        const { data: responseUpload } = await createOnUploadPostAPI(data);
-        console.log('responseUpload ==========>', responseUpload)
-        quillObj.insertEmbed(range, "image", responseUpload.urlFile);
-      }
     };
   }
 

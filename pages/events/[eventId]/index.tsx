@@ -1,10 +1,8 @@
 import LayoutDashboard from "@/components/layout-dashboard";
-import { GetOnePostAPI } from "@/api-site/post";
 import { useRouter } from "next/router";
 import { Image } from "antd";
 import { BiComment } from "react-icons/bi";
 import { useAuth } from "@/components/util/context-user";
-import ListFollowPosts from "@/components/post/list-follow-posts";
 import { LoadingFile } from "@/components/ui/loading-file";
 
 const PostShow = () => {
@@ -13,19 +11,6 @@ const PostShow = () => {
   const { query } = useRouter();
   const postSlug = String(query?.postId);
 
-  const {
-    data: post,
-    isError: isErrorPost,
-    isLoading: isLoadingPost,
-  } = GetOnePostAPI({ postSlug });
-
-  const dataTablePosts = isLoadingPost ? (
-    <LoadingFile />
-  ) : isErrorPost ? (
-    <strong>Error find data please try again...</strong>
-  ) : (
-    <ListFollowPosts item={post} commentTake={10} />
-  );
 
   return (
     <>
@@ -38,7 +23,7 @@ const PostShow = () => {
                   <div className="border-gray-200 lg:col-span-3 xl:col-span-4">
                     <div className="flow-root">
                       <div className="mx-auto sm:px-6 md:px-8">
-                        {dataTablePosts}
+                        {/* {dataTablePosts} */}
                       </div>
                     </div>
                   </div>
