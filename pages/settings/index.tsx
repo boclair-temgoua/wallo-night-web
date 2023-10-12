@@ -21,7 +21,7 @@ const Settings = () => {
 
                 <div className="flow-root">
                   <div className="pt-6 border-gray-200 lg:order-1 lg:col-span-1">
-                    {user?.id ? <UpdateFormUser userId={user?.id} /> : null}
+                    {/* {user?.id ? <UpdateFormUser userId={user?.id} /> : null} */}
 
                     {user?.profileId ? (
                       <UpdateFormProfile

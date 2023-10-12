@@ -31,10 +31,7 @@ type Props = {
 const schema = yup.object({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
-  url: yup.string().url().optional(),
   birthday: yup.date().max(new Date()).required(),
-  currencyId: yup.string().uuid().required(),
-  countryId: yup.string().uuid().required(),
 });
 
 const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
@@ -138,46 +135,6 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
           <div className="px-4 py-5">
             <h2 className="text-base font-bold text-gray-900"> Profile </h2>
 
-            {profile?.image ? (
-              <div className="mt-2 text-center space-x-2">
-                <Avatar
-                  size={200}
-                  shape="circle"
-                  src={getOneFileProfileAPI(String(profile?.image))}
-                  alt={`${profile?.firstName} ${profile?.lastName}`}
-                />
-              </div>
-            ) : (
-              <div className="mb-4">
-                <Controller
-                  name="attachment"
-                  control={control}
-                  render={({ field: { onChange } }) => (
-                    <>
-                      <div className="text-center justify-center mx-auto">
-                        <Upload
-                          name="attachment"
-                          listType="picture"
-                          maxCount={1}
-                          className="upload-list-inline"
-                          onChange={onChange}
-                          accept=".png,.jpg"
-                        >
-                          <Button icon={<UploadOutlined />}>
-                            Click to Upload
-                          </Button>
-                        </Upload>
-                      </div>
-                    </>
-                  )}
-                />
-                {/* {errors?.attachment && (
-                                        <span className="flex items-center font-medium tracking-wide text-red-500 text-xs mt-1 ml-1">
-                                            {errors?.attachment?.message}
-                                        </span>
-                                    )} */}
-              </div>
-            )}
 
             <div className="grid grid-cols-1 mt-2 sm:grid-cols-3 gap-y-5 gap-x-6">
               <div className="mt-2">
@@ -214,52 +171,9 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
               </div>
             </div>
 
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
-                <TextInput
-                  label="Website"
-                  control={control}
-                  type="url"
-                  name="url"
-                  placeholder="Website"
-                  errors={errors}
-                />
-              </div>
-              <div className="mt-2">
-                <DateInput
-                  label="Birthday"
-                  control={control}
-                  placeholder="12/01/2023"
-                  name="birthday"
-                  errors={errors}
-                />
-              </div>
-            </div>
 
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
-                <TextInput
-                  label="First address"
-                  control={control}
-                  type="text"
-                  name="firstAddress"
-                  placeholder="First address"
-                  errors={errors}
-                />
-              </div>
-              <div className="mt-2">
-                <TextInput
-                  label="Second address"
-                  control={control}
-                  type="text"
-                  name="secondAddress"
-                  placeholder="Second address"
-                  errors={errors}
-                />
-              </div>
-            </div>
 
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-3 gap-y-5 gap-x-6">
+            <div className="grid grid-cols-1 mt-2 sm:grid-cols-4 gap-y-5 gap-x-6">
               <div className="mt-2">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
                   Color
@@ -306,30 +220,37 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                 />
               </div>
               <div className="mt-2">
-                <SelectSearchInput
-                  label="Counties"
-                  firstOptionName="Country"
-                  valueType="key"
+                <TextInput
+                  label="First address"
                   control={control}
+                  type="text"
+                  name="firstAddress"
+                  placeholder="First address"
                   errors={errors}
-                  placeholder="Country"
-                  name="countryId"
-                  dataItem={countries}
                 />
               </div>
               <div className="mt-2">
-                <SelectSearchInput
-                  label="Currency"
-                  firstOptionName="Currency"
-                  valueType="key"
+                <TextInput
+                  label="Second address"
                   control={control}
+                  type="text"
+                  name="secondAddress"
+                  placeholder="Second address"
                   errors={errors}
-                  placeholder="Currency"
-                  name="currencyId"
-                  dataItem={currencies}
+                />
+              </div>
+              <div className="mt-2">
+                <DateInput
+                  label="Birthday"
+                  control={control}
+                  placeholder="12/01/2023"
+                  name="birthday"
+                  errors={errors}
                 />
               </div>
             </div>
+
+
 
             <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
               <div className="mt-2">

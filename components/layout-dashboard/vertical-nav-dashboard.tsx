@@ -60,11 +60,6 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
       href: "/dashboard",
       icon: <BiHomeCircle className={classIcon} />,
     },
-    {
-      title: "Event",
-      href: "/event",
-      icon: <BiSearch className={classIcon} />,
-    },
   ]);
 
   const [monetizeItems] = useState<NavbarProps[]>(MONETIZE_ITEMS);

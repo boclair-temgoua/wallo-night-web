@@ -12,34 +12,6 @@ const HorizontalNavSetting: React.FC = () => {
       title: "Profile",
       href: "/settings",
     },
-    {
-      title: "Payments",
-      href: "/settings/payments",
-    },
-    {
-      title: "Configurations",
-      href: "/settings/config",
-    },
-    {
-      title: "Billing",
-      href: "/settings/billing",
-    },
-    {
-      title: "Notifications",
-      href: "/settings/notifications",
-    },
-    {
-      title: "Subscribers",
-      href: "/settings/subscribers",
-    },
-    {
-      title: "Followings",
-      href: "/settings/followings",
-    },
-    {
-      title: "Followers",
-      href: "/settings/followers",
-    },
   ]);
 
   return (
