@@ -79,7 +79,7 @@ const ValidateOrderEvent: React.FC<Props> = ({
               <div className="px-4 py-5">
 
                 {hasErrors && (
-                  <div className="relative mb-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
+                  <div className="relative mt-4 block w-full rounded-lg bg-red-500 p-4 text-base leading-5 text-white opacity-100">
                     {hasErrors}
                   </div>
                 )}

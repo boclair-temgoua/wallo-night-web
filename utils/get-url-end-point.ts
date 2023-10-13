@@ -175,6 +175,16 @@ export const apiEndpoints: ClientApiMethods = {
     method: PUT,
   },
 
+  /****************** Contributor route */
+  getContributors: {
+    endpoint: `${baseUrl}/contributors`,
+    method: GET,
+  },
+  createOneContributor: {
+    endpoint: `${baseUrl}/contributors`,
+    method: POST,
+  },
+
   /****************** Transaction route */
   getTransactions: {
     endpoint: `${baseUrl}/transactions`,

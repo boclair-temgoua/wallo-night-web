@@ -12,7 +12,7 @@ import { useAuth } from "@/components/util/context-user";
 
 const Contributors = () => {
   const user = useAuth() as any;
-  const router = useRouter();
+  const { push } = useRouter();
   const [donationsArrays] = useState(arrayTransactions || []);
 
   console.log('user ========>', user)
@@ -31,6 +31,7 @@ const Contributors = () => {
                       <div className="sm:flex sm:items-center sm:justify-between">
                         <div className="mt-4 sm:mt-0">
                           <ButtonInput
+                            onClick={() => push(`/contributors/create`)}
                             shape="default"
                             type="button"
                             size="normal"

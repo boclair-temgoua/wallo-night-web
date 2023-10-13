@@ -16,6 +16,7 @@ import { Button, Image } from "antd";
 import { viewOneFileUploadAPI } from "@/api-site/upload";
 import { formatePrice } from "@/utils";
 import { LayoutSite } from "@/components/layout-site";
+import { PrivateComponent } from "@/components/util/private-component";
 
 
 const CheckoutView = () => {
@@ -189,8 +190,7 @@ const CheckoutView = () => {
                         <ContentLoader height="500" width="100%" viewBox="0 0 265 230" >
                           <rect x="15" y="25" rx="2" ry="2" width="350" height="15" />
                           <rect x="15" y="50" rx="2" ry="2" width="350" height="100" />
-                          <rect x="15" y="160" rx="2" ry="2" width="130" height="40" />
-                          <rect x="150" y="160" rx="2" ry="2" width="150" height="40" />
+                          <rect x="15" y="160" rx="2" ry="2" width="350" height="40" />
                           <rect x="15" y="210" rx="2" ry="2" width="350" height="40" />
                         </ContentLoader>}
                     </div>
@@ -211,4 +211,4 @@ const CheckoutView = () => {
   );
 };
 
-export default CheckoutView;
+export default PrivateComponent(CheckoutView);;
