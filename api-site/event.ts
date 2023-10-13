@@ -174,7 +174,7 @@ export const getOneFileGalleryAPI = (fileName: string) =>
 export const getEventsAPI = async (
   payload: {
     status?: string;
-    organizationId: string;
+    organizationId?: string;
   } & PaginationRequest
 ): Promise<{ data: ResponseEventModel }> => {
   return await makeApiCall({
@@ -184,7 +184,7 @@ export const getEventsAPI = async (
 };
 
 export const GetInfiniteEventsAPI = (payload: {
-  organizationId: string;
+  organizationId?: string;
   take: number;
   status?: string;
   sort: SortModel;

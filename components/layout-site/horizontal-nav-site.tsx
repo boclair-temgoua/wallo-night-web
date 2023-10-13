@@ -13,7 +13,7 @@ export type NavbarProps = {
 const NAVIGATION_ITEMS: NavbarProps[] = [
   {
     title: "Events",
-    href: "/events/site",
+    href: "/events/our-events",
   },
   {
     title: "Faq",

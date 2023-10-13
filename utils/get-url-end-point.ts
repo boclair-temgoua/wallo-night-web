@@ -175,6 +175,16 @@ export const apiEndpoints: ClientApiMethods = {
     method: GET,
   },
 
+  /****************** Order Events route */
+  getOneOrderEvent: {
+    endpoint: `${baseUrl}/order-events/view`,
+    method: GET,
+  },
+  updateOneOrderEvent: {
+    endpoint: `${baseUrl}/order-events/:orderEventId`,
+    method: PUT,
+  },
+
   /****************** Uploads route */
   getUploads: {
     endpoint: `${baseUrl}/uploads`,
@@ -230,12 +240,12 @@ export const apiEndpoints: ClientApiMethods = {
   },
 
   /****************** Payments route */
-  createOnePaymentsPaypalSubscribe: {
-    endpoint: `${baseUrl}/payments/paypal/subscribe`,
+  createOnePaymentsPaypalPayment: {
+    endpoint: `${baseUrl}/payments/paypal/payment`,
     method: POST,
   },
-  createOnePaymentsStripeSubscribe: {
-    endpoint: `${baseUrl}/payments/stripe/subscribe`,
+  createOnePaymentsStripePayment: {
+    endpoint: `${baseUrl}/payments/stripe/payment`,
     method: POST,
   },
 

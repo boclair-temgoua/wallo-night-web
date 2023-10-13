@@ -12,6 +12,7 @@ export type EventModel = {
   location: string;
   requirement: string;
   slug: string;
+  dateEvent: Date;
   urlRedirect: string;
   enableUrlRedirect: boolean;
   price: string;
@@ -35,8 +36,8 @@ export type EventModel = {
     name: string;
     image: string;
   };
-  uploadsImage: string;
-  uploadsFile: string;
+  uploadsImage: any;
+  uploadsFile: any[];
 };
 
 export type EventFormModel = {

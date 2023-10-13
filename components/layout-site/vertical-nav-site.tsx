@@ -41,7 +41,7 @@ const VerticalNavSite: React.FC<Props> = ({ user }) => {
     },
     {
       title: "Events",
-      href: "/events/site",
+      href: "/events/our-events",
       icon: <SlEvent className={classIcon} />,
     },
     {

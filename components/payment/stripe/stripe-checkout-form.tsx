@@ -9,6 +9,7 @@ import { useRouter } from "next/router";
 import { TextInput } from "@/components/ui";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
+import { generateLongUUID } from "@/utils/generate-random";
 
 const schema = yup.object({
   email: yup
@@ -55,9 +56,7 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
     undefined
   );
   const {
-    watch,
     control,
-    register,
     handleSubmit,
     formState: { errors },
   } = useForm<any>({
@@ -77,6 +76,7 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
     setHasErrors(true);
 
     try {
+      const newReference = generateLongUUID(30);
       const paymentMethodReq: any = await stripe.createPaymentMethod({
         type: "card",
         card: elements.getElement("card"),
@@ -93,7 +93,7 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
         return;
       }
 
-      const { data: response } = await CreateOnPaymentPI({
+      await CreateOnPaymentPI({
         data: { ...data, paymentMethod },
         paymentModel,
       });
@@ -101,7 +101,7 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
       setHasErrors(false);
       setLoading(false);
 
-      push(`/transactions/success?token=${response?.token}`);
+      push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
@@ -157,6 +157,17 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
         >
           Continue
         </ButtonInput>
+        {/* <div className="flex justify-between items-center">
+          <label
+            htmlFor="password"
+            className="block text-sm mb-2 dark:text-white"
+          ></label>
+          <span
+            className="text-sm text-blue-600 decoration-2 hover:underline font-medium"
+          >
+            Power by stripe
+          </span>
+        </div> */}
       </div>
     </form>
   );

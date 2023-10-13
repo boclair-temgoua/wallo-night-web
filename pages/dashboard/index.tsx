@@ -63,7 +63,7 @@ const Dashboard = () => {
                     <div className="flex items-center mt-3">
                       <p className="text-3xl font-bold">{formatePrice({
                         value: Number(user?.wallet?.amount ?? 0),
-                        isDivide: false,
+                        isDivide: true,
                       }) ?? ""} EUR</p>
                     </div>
                   </div>

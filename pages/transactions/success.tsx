@@ -12,7 +12,7 @@ const TransactionSuccess = () => {
       <div className="mt-8 max-w-lg mx-auto">
         <Result
           status="success"
-          title="Successfully Purchased"
+          title="Successfully "
           subTitle={`Order number: ${token}`}
           extra={[
             <>
@@ -23,9 +23,9 @@ const TransactionSuccess = () => {
                   loading={false}
                   onClick={() => back()}
                 >
-                  By Again
+                  Tornare
                 </ButtonCancelInput>
-                <ButtonInput
+                {/* <ButtonInput
                   minW="fit"
                   shape="default"
                   type="button"
@@ -37,7 +37,7 @@ const TransactionSuccess = () => {
                   }}
                 >
                   Go Home
-                </ButtonInput>
+                </ButtonInput> */}
               </div>
             </>,
           ]}

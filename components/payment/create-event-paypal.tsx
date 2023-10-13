@@ -4,28 +4,35 @@ import { CreateOnPaymentPI } from "@/api-site/payment";
 import { PaymentModel } from "../../api-site/payment";
 import { AlertDangerNotification } from "@/utils";
 import { useRouter } from "next/router";
+import { generateLongUUID } from "@/utils/generate-random";
 
 type Props = { data?: any; paymentModel: PaymentModel };
-const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
+const CreateEventPayPal: React.FC<Props> = ({ data, paymentModel }) => {
   const { push } = useRouter();
-  const { currency, amount, membershipId, userId } = data;
+  const { amount, userId } = data;
   const [hasErrors, setHasErrors] = useState<any>(undefined);
 
   const handleApprove = async (order: any) => {
+    const newReference = generateLongUUID(30);
     const amountPalpal = order?.purchase_units[0]?.amount;
-    setHasErrors(undefined);
-    const data = {
-      amount: { value: Number(amountPalpal?.value), month: amount?.month },
-      currency: amountPalpal?.currency_code,
+    setHasErrors(false);
+    const payload = {
+      userId,
+      reference: newReference,
+      amount: {
+        value: Number(amountPalpal?.value),
+        currency: amountPalpal?.currency_code,
+        quantity: amount.quantity,
+      }
     };
 
     try {
-      const { data: response } = await CreateOnPaymentPI({
-        data: { ...data },
+      await CreateOnPaymentPI({
+        data: payload,
         paymentModel,
       });
-      
-      push(`/transactions/success?token=${response?.token}`);
+
+      push(`/transactions/success?token=${newReference}`);
     } catch (error: any) {
       setHasErrors(true);
       setHasErrors(error.response.data.message);
@@ -44,7 +51,7 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
         {
           description: "Payment amount balance",
           amount: {
-            currency_code: currency,
+            currency_code: amount?.currency,
             value: Number(amount?.value),
           },
         },
@@ -67,7 +74,7 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
           options={{
             clientId: `${process.env.NEXT_PUBLIC_PAYPAL_CLIENT_ID}`,
             components: "buttons",
-            currency: currency,
+            currency: amount?.currency,
             intent: "capture",
           }}
         >
@@ -80,8 +87,8 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
                   : actions?.resolve();
               }}
               disabled={false}
-              style={{ layout: "horizontal", label: "paypal", color: "white" }}
-              forceReRender={[Number(amount?.value), currency]}
+              style={{ layout: "horizontal", label: "paypal", color: "blue" }}
+              forceReRender={[Number(amount?.value), amount?.currency]}
               fundingSource={undefined}
               createOrder={(data, actions) => createOrder(data, actions)}
               onApprove={async (data, action) => {
@@ -89,7 +96,7 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
                 const name = details?.payer?.name?.given_name;
                 return handleApprove(details);
               }}
-              onCancel={() => {}}
+              onCancel={() => { }}
               onError={(error) => {
                 setHasErrors(error);
                 console.log(`PayPal Checkout onError ====>`, error);
@@ -101,4 +108,4 @@ const CreateSubscribePayPal: React.FC<Props> = ({ data, paymentModel }) => {
     </>
   );
 };
-export { CreateSubscribePayPal };
+export { CreateEventPayPal };

@@ -1,23 +1,23 @@
 import { makeApiCall } from "@/utils/get-url-end-point";
 
-export type PaymentModel = "PAYPAL-SUBSCRIBE" | "STRIPE-SUBSCRIBE";
+export type PaymentModel = "PAYPAL-PAYMENT" | "STRIPE-PAYMENT";
 
 export const CreateOnPaymentPI = async (payload: {
   data: any;
   paymentModel: PaymentModel;
 }): Promise<any> => {
   const { paymentModel, data } = payload;
-  
-  if (paymentModel === "PAYPAL-SUBSCRIBE") {
+
+  if (paymentModel === "PAYPAL-PAYMENT") {
     return await makeApiCall({
-      action: "createOnePaymentsPaypalSubscribe",
+      action: "createOnePaymentsPaypalPayment",
       body: { paymentModel, ...data },
     });
   }
 
-  if (paymentModel === "STRIPE-SUBSCRIBE") {
+  if (paymentModel === "STRIPE-PAYMENT") {
     return await makeApiCall({
-      action: "createOnePaymentsStripeSubscribe",
+      action: "createOnePaymentsStripePayment",
       body: { paymentModel, ...data },
     });
   }
