@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Avatar, Button, Select, Space, Upload } from "antd";
 import {
-  GetAllCountiesAPI,
-  GetAllCurrenciesAPI,
   UpdateOneProfileAPI,
   getOneFileProfileAPI,
   getOneProfileAPI,
@@ -31,7 +29,6 @@ type Props = {
 const schema = yup.object({
   firstName: yup.string().required(),
   lastName: yup.string().required(),
-  birthday: yup.date().max(new Date()).required(),
 });
 
 const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
@@ -50,11 +47,6 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
     mode: "onChange",
   });
 
-  const { data: dataCurrencies } = GetAllCurrenciesAPI();
-  const currencies: any = dataCurrencies?.data;
-
-  const { data: countries } = GetAllCountiesAPI();
-
   const fetchOneProfile = async () =>
     await getOneProfileAPI({ profileId: profileId });
   const { data: profileItem } = useQuery(
@@ -70,17 +62,13 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
   useEffect(() => {
     if (profile) {
       const fields = [
-        "birthday",
-        "currencyId",
-        "countryId",
-        "url",
         "phone",
         "color",
+        "fullName",
         "firstName",
         "lastName",
         "secondAddress",
         "firstAddress",
-        "description",
       ];
       fields?.forEach((field: any) => setValue(field, profile[field]));
     }
@@ -173,7 +161,7 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
 
 
 
-            <div className="grid grid-cols-1 mt-2 sm:grid-cols-4 gap-y-5 gap-x-6">
+            <div className="grid grid-cols-1 mt-2 sm:grid-cols-3 gap-y-5 gap-x-6">
               <div className="mt-2">
                 <label className="block text-gray-700 text-sm font-bold mb-2">
                   Color
@@ -236,30 +224,6 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
                   type="text"
                   name="secondAddress"
                   placeholder="Second address"
-                  errors={errors}
-                />
-              </div>
-              <div className="mt-2">
-                <DateInput
-                  label="Birthday"
-                  control={control}
-                  placeholder="12/01/2023"
-                  name="birthday"
-                  errors={errors}
-                />
-              </div>
-            </div>
-
-
-
-            <div className="grid grid-cols-1 mt-2 gap-y-5 gap-x-6">
-              <div className="mt-2">
-                <TextAreaInput
-                  row={3}
-                  control={control}
-                  label="Bio"
-                  name="description"
-                  placeholder="Introduce yourself and what you're creating"
                   errors={errors}
                 />
               </div>

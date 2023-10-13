@@ -99,35 +99,6 @@ export const getOneProfileAPI = async (payload: {
   });
 };
 
-
-export const GetAllCurrenciesAPI = (search?: string) => {
-  return useQuery({
-    queryKey: ["currencies"],
-    queryFn: async () =>
-      await makeApiCall({
-        action: "getAllCurrencies",
-        queryParams: search,
-      }),
-    staleTime: 60_000,
-    refetchOnWindowFocus: false,
-  });
-};
-
-export const GetAllCountiesAPI = (search?: string) => {
-  const { data, isError, isLoading, status } = useQuery({
-    queryKey: ["countries"],
-    queryFn: async () =>
-      await makeApiCall({
-        action: "getAllCounties",
-        queryParams: search,
-      }),
-    staleTime: 60_000,
-    refetchOnWindowFocus: false,
-  });
-
-  return { data: data?.data as any, isError, isLoading, status };
-};
-
 export const getOneFileProfileAPI = (fileName: string) =>
   fileName
     ? `${process.env.NEXT_PUBLIC_HOST_SERVER}/users/file/${fileName}`

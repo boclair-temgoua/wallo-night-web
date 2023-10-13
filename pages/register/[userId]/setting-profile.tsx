@@ -12,8 +12,6 @@ import { AlertDangerNotification } from "@/utils/alert-notification";
 import { useRouter } from "next/router";
 import { PrivateComponent } from "@/components/util/private-component";
 import {
-  GetAllCountiesAPI,
-  GetAllCurrenciesAPI,
   UpdateOneProfileNextStepAPI,
 } from "@/api-site/profile";
 import { NextStepProfileFormModel } from "@/types/profile.type";
@@ -54,12 +52,6 @@ const SettingProfile = () => {
     resolver: yupResolver(schema),
     mode: "onChange",
   });
-
-  const { data: dataCurrencies } = GetAllCurrenciesAPI();
-  const currencies: any = dataCurrencies?.data;
-
-  const { data: dataCountries } = GetAllCountiesAPI();
-  const countries: any = dataCountries?.data;
 
   const { data } = GetOneUserPublicAPI({ userId })
   const user: any = data?.data;
@@ -151,32 +143,6 @@ const SettingProfile = () => {
               />
             </div>
           ) : null}
-
-          <div className="mb-4">
-            <SelectSearchInput
-              firstOptionName="Currency"
-              label="Currency"
-              valueType="key"
-              control={control}
-              errors={errors}
-              placeholder="Currency"
-              name="currencyId"
-              dataItem={currencies}
-            />
-          </div>
-
-          <div className="mb-4">
-            <SelectSearchInput
-              firstOptionName="Country"
-              label="Country residence"
-              valueType="key"
-              control={control}
-              errors={errors}
-              placeholder="Country"
-              name="countryId"
-              dataItem={countries}
-            />
-          </div>
 
           <div className="mb-4">
             <DateInput

@@ -133,16 +133,6 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/users/profile/show/:profileId`,
     method: GET,
   },
-  /****************** Currency or Countries route */
-  getAllCurrencies: {
-    endpoint: `${baseUrl}/currencies`,
-    method: GET,
-  },
-  getAllCounties: {
-    endpoint: `${baseUrl}/countries`,
-    method: GET,
-  },
-
   /****************** Comments route */
   getComments: {
     endpoint: `${baseUrl}/comments`,
@@ -183,6 +173,12 @@ export const apiEndpoints: ClientApiMethods = {
   updateOneOrderEvent: {
     endpoint: `${baseUrl}/order-events/:orderEventId`,
     method: PUT,
+  },
+
+  /****************** Transaction route */
+  getTransactions: {
+    endpoint: `${baseUrl}/transactions`,
+    method: GET,
   },
 
   /****************** Uploads route */

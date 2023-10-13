@@ -11,6 +11,7 @@ import { BiCog, BiDotsHorizontal } from "react-icons/bi";
 import Link from "next/link";
 import { IoShareOutline } from "react-icons/io5";
 import { useAuth } from "@/components/util/context-user";
+import { RecentTransactions } from "@/components/transaction/recent-transactions";
 
 const Dashboard = () => {
   const user = useAuth() as any;
@@ -69,96 +70,7 @@ const Dashboard = () => {
                   </div>
 
                
-                  <div className="mt-4 px-4 py-4 overflow-hidden bg-white border border-gray-200 rounded-lg">
-                    <div className="flex items-center">
-                      <p className="text-lg font-bold">Recent transactions</p>
-                    </div>
-
-                    <div className="divide-y divide-gray-200">
-                      {donationsArrays.length > 0 ? (
-                        <table className="min-w-full mt-4 lg:divide-y lg:divide-gray-200">
-                          <tbody className="divide-y divide-gray-200">
-                            {donationsArrays.map((item: any, index) => (
-                              <tr key={index}>
-                                <td className="py-4 text-sm font-bold text-gray-900">
-                                  <div className="flex items-center flex-1 min-w-0">
-                                    <Avatar
-                                      size={50}
-                                      src={item?.image}
-                                      alt=""
-                                    />
-                                    <div className="flex-1 min-w-0 ml-4">
-                                      <p className="text-sm font-bold text-gray-900">
-                                        {item?.name}
-                                      </p>
-                                      <p className="mt-1 text-sm font-medium text-gray-500 truncate">
-                                        {item?.email}
-                                      </p>
-                                      <p className="lg:hidden mt-1 text-sm font-medium text-gray-500 truncate">
-                                        {item?.createdAt}
-                                      </p>
-                                    </div>
-                                  </div>
-                                  {/* <div className="inline-flex items-center">
-                                    {donation?.title}
-                                  </div>
-                                  <div className="space-y-1 pt-2">
-                                    <p className="text-sm font-medium text-gray-500">
-                                      temgoua2013@gmail.com
-                                    </p>
-                                  </div> */}
-                                </td>
-
-                                {/* <td className="py-4 text-sm font-bold text-right text-gray-900 lg:table-cell">
-                                  {item?.amount}&nbsp;€ 
-                                </td>
-
-                                <td className="py-8 text-sm font-medium text-right text-gray-900 lg:table-cell">
-                                  18 sept. 2023
-                                </td> */}
-
-                                <td className="hidden text-sm text-right font-bold text-gray-900 lg:table-cell">
-                                  {formatePrice({
-                                    value: item?.amount || 0,
-                                    isDivide: false,
-                                  })}
-                                  &nbsp;Fcfa
-                                </td>
-
-                                <td className="hidden text-sm text-right font-medium text-gray-600 lg:table-cell">
-                                  {item?.createdAt}
-                                </td>
-
-                                <td className="py-4 text-sm font-medium text-right text-gray-400">
-                                  <Button
-                                    type="text"
-                                    shape="circle"
-                                    icon={
-                                      <BiDotsHorizontal className="w-5 h-5" />
-                                    }
-                                    size="small"
-                                  />
-                                  <div className="mt-1 lg:hidden pt-1">
-                                    <p className="inline-flex text-sm font-bold text-gray-900">
-                                      {item?.amount}&nbsp;Fcfa
-                                    </p>
-                                    {/* <div className="inline-flex items-center justify-end mt-1">
-                                      07 January, 2022
-                                    </div> */}
-                                  </div>
-                                </td>
-                              </tr>
-                            ))}
-                          </tbody>
-                        </table>
-                      ) : (
-                        <EmptyData
-                          title="Add your first donation to get started"
-                          description={`Extras is a simple and effective way to offer something to your audience. It could be anything. See some examples here`}
-                        />
-                      )}
-                    </div>
-                  </div>
+                  {user?.id ? <RecentTransactions userId={user?.profile?.userId} /> : null}
 
                   
                 </div>

@@ -85,11 +85,6 @@ const Contributors = () => {
                                       }
                                       size="small"
                                     />
-                                    <div className="mt-1 lg:hidden pt-1">
-                                      <p className="inline-flex text-sm font-bold text-gray-900">
-                                        {item?.amount}&nbsp;Fcfa
-                                      </p>
-                                    </div>
                                   </td>
                                 </tr>
                               ))}

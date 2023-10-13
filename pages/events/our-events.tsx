@@ -64,7 +64,7 @@ const PostShow = () => {
       <LayoutSite title={'Events'}>
 
         <div className="py-4 px-4 mx-auto sm:px-6 lg:px-8 max-w-7xl">
-          <div className="grid mt-2 grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="grid mt-2 grid-cols-1 gap-6 sm:gap-6 lg:gap-8 xl:gap-4 sm:mt-12 sm:grid-cols-2 lg:grid-cols-2">
 
             {dataTableEvents}
 
