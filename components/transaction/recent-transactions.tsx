@@ -23,7 +23,6 @@ const RecentTransactions: React.FC<Props> = ({ userId,model }) => {
     fetchNextPage,
   } = GetInfiniteTransactionsAPI({
     model: model?.toLocaleUpperCase(),
-    userReceiveId: userId,
     take: 10,
     sort: "DESC",
     queryKey: ["transactions", "infinite"],
