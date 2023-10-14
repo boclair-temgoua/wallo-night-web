@@ -5,6 +5,7 @@ import { ReadMore } from "@/utils/read-more";
 import { BiDotsHorizontal } from "react-icons/bi";
 import { formateFromNow } from "@/utils";
 import { ContributorModel } from "@/types/contributor";
+import { capitalizeOneFirstLetter } from "@/utils/utils";
 
 type Props = {
   item?: ContributorModel;
@@ -17,7 +18,13 @@ const ListContributors: React.FC<Props> = ({ item, index }) => {
       <tr key={index}>
         <td className="py-4 text-sm font-bold text-gray-900">
           <div className="flex items-center flex-1 min-w-0">
-            <Avatar size={50} src={item?.profile?.image} alt="" />
+            {item?.profile?.image ?
+              <Avatar size={50} src={item?.profile?.image} alt="" /> :
+              <Avatar size={50} style={{ backgroundColor: '#fde3', color: `${item?.profile?.color}` }}>
+                {capitalizeOneFirstLetter(String(item?.profile?.firstName), String(item?.profile?.lastName))}
+              </Avatar>
+            }
+
             <div className="flex-1 min-w-0 ml-4">
               <p className="text-sm font-bold text-gray-900">
                 {item?.profile?.firstName} {item?.profile?.lastName}

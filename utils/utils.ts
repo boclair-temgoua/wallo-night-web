@@ -20,8 +20,10 @@ export const capitalizeFirstLetter = (value: string): string => {
 };
 
 /** Fix date */
-export const capitalizeOneFirstLetter = (fullItem: string) => {
-  return capitalizeName(fullItem).substring(0, 2).toUpperCase();
+export const capitalizeOneFirstLetter = (a: string, b: string) => {
+  const fistLetter = capitalizeName(a).substring(0, 1).toUpperCase();
+  const secondLetter = capitalizeName(b).substring(0, 1).toUpperCase();
+  return `${fistLetter}${secondLetter}`;
 };
 
 /** Fix truncate */
