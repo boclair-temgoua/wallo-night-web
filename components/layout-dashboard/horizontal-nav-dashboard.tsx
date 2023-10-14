@@ -7,6 +7,7 @@ import { usePathname } from "next/navigation";
 import { getCurrentUserFormToken } from "../util/context-user";
 import { useState } from "react";
 import { capitalizeFirstLetter, capitalizeOneFirstLetter } from "@/utils/utils";
+import { AvatarComponent } from "@/utils/avatar-component";
 
 export type NavbarProps = {
   title: string;
@@ -80,17 +81,10 @@ const HorizontalNavDashboard: React.FC<Props> = ({ user, showDrawer }) => {
                   type="button"
                   className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
                 >
-                  {/* <Avatar
+                   <AvatarComponent
+                    profile={user?.profile}
                     className="object-cover bg-gray-300 rounded-full w-9 h-9"
-                    src={user?.profile?.image}
-                    alt={`${user?.profile?.firstName} ${user?.profile?.lastName}`}
-                  /> */}
-                  {user?.profile?.image ?
-                    <Avatar size={50} src={user?.profile?.image} alt={`${user?.profile?.firstName} ${user?.profile?.lastName}`} /> :
-                    <Avatar
-                      className="object-cover bg-gray-300 rounded-full w-9 h-9"
-                      style={{ backgroundColor: '#fde3', color: `${user?.profile?.color}` }}>{capitalizeOneFirstLetter(user?.profile?.firstName, user?.profile?.lastName)}</Avatar>
-                  }
+                  />
                   <p className="ml-1 text-sm font-bold text-gray-900">
                     {user?.profile?.firstName} {user?.profile?.lastName}
                   </p>
