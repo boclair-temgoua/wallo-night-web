@@ -106,7 +106,7 @@ export const getContributorsAPI = async (
   });
 };
 
-export const GetInfiniteEventsAPI = (payload: {
+export const GetInfiniteContributorsAPI = (payload: {
   organizationId?: string;
   take: number;
   status?: string;

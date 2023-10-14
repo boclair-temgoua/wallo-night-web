@@ -22,6 +22,8 @@ export type ContributorModel = {
     image: null;
     userId: string;
     fullName: string;
+    firstName: string;
+    lastName: string;
   };
   role: {
     name: string;

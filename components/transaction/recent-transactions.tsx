@@ -15,9 +15,9 @@ const RecentTransactions: React.FC<Props> = ({ userId,model }) => {
   const { ref, inView } = useInView();
 
   const {
-    isLoading: isLoadingMembership,
-    isError: isErrorMembership,
-    data: dataGallery,
+    isLoading: isLoadingTransactions,
+    isError: isErrorTransactions,
+    data: dataTransactions,
     isFetchingNextPage,
     hasNextPage,
     fetchNextPage,
@@ -50,14 +50,14 @@ const RecentTransactions: React.FC<Props> = ({ userId,model }) => {
     };
   }, [fetchNextPage, hasNextPage, inView]);
 
-  const dataTableTransactions = isLoadingMembership ? (
+  const dataTableTransactions = isLoadingTransactions ? (
     <LoadingFile />
-  ) : isErrorMembership ? (
+  ) : isErrorTransactions ? (
     <strong>Error find data please try again...</strong>
-  ) : dataGallery?.pages[0]?.data?.total <= 0 ? (
+  ) : dataTransactions?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
-    dataGallery.pages
+    dataTransactions.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <ListTransactions item={item} key={index} index={index} />
