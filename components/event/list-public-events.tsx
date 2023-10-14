@@ -20,7 +20,7 @@ const ListPublicEvents: React.FC<Props> = ({ item }) => {
   return (
     <>
       <div key={item?.id} className="flex flex-col overflow-hidden transition-all duration-300 bg-white border border-gray-200 rounded-md hover:shadow-xl">
-        {item?.uploadsImage.length > 0 ?
+        {item?.uploadsImage && item?.uploadsImage.length > 0 ?
           <Image
             preview={false}
             height={200}
@@ -45,7 +45,7 @@ const ListPublicEvents: React.FC<Props> = ({ item }) => {
             </p>
             <p className="ml-auto text-lg font-bold">
               <ButtonInput
-                 onClick={() => router.push(`/events/${item?.id}/checkout`)}
+                onClick={() => router.push(`/events/${item?.id}/checkout`)}
                 shape="default"
                 type="button"
                 size="normal"

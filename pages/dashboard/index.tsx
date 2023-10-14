@@ -12,6 +12,7 @@ import Link from "next/link";
 import { IoShareOutline } from "react-icons/io5";
 import { useAuth } from "@/components/util/context-user";
 import { RecentTransactions } from "@/components/transaction/recent-transactions";
+import { QrScanner } from '@yudiel/react-qr-scanner';
 
 const Dashboard = () => {
   const user = useAuth() as any;
@@ -69,10 +70,19 @@ const Dashboard = () => {
                     </div>
                   </div>
 
-               
+                  {/* <QrScanner
+                    // onError={handleError}
+                    // onScan={handleScan}
+                    // chooseDeviceId={()=>selected}
+                    // style={{ width: "300px" }}
+                    onDecode={(result) => console.log(result)}
+                    onError={(error) => console.log(error?.message)}
+                  /> */}
+
+
                   {user?.id ? <RecentTransactions userId={user?.profile?.userId} /> : null}
 
-                  
+
                 </div>
               </div>
             </div>
