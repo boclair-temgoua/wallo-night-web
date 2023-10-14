@@ -1,18 +1,14 @@
 import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { ButtonInput } from "@/components/ui/button-input";
 import { useState } from "react";
-import { Avatar, Button } from "antd";
-import { EmptyData } from "@/components/ui/empty-data";
+import { Avatar } from "antd";
 import { useRouter } from "next/router";
 import { arrayTransactions } from "@/components/mock";
 import { formatePrice } from "@/utils";
-import { BiCog, BiDotsHorizontal } from "react-icons/bi";
-import Link from "next/link";
+import { BiCog } from "react-icons/bi";
 import { IoShareOutline } from "react-icons/io5";
 import { useAuth } from "@/components/util/context-user";
 import { RecentTransactions } from "@/components/transaction/recent-transactions";
-import { QrScanner } from '@yudiel/react-qr-scanner';
 
 const Dashboard = () => {
   const user = useAuth() as any;
