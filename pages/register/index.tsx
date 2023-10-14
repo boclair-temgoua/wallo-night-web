@@ -196,7 +196,7 @@ const Register = () => {
           </div>
         </form>
 
-        <div className="flex items-center justify-between mt-4">
+        {/* <div className="flex items-center justify-between mt-4">
           <span className="w-1/5 border-b dark:border-gray-600 lg:w-1/5"></span>
           <p className="text-xs text-center text-gray-500 uppercase dark:text-gray-400">
             or login with Social Media
@@ -240,7 +240,7 @@ const Register = () => {
           </svg>
 
           <span className="mx-2 font-bold">Sign in with GitHub</span>
-        </a>
+        </a> */}
 
         <Link href="/login">
           <p className="mt-8 text-xs font-bold text-center text-gray-600 hover:underline cursor-pointer hover:text-blue-600">
