@@ -13,7 +13,7 @@ const TransactionSuccess = () => {
         <Result
           status="success"
           title="Successfully "
-          subTitle={`Order number: ${token}`}
+          // subTitle={`Order number: ${token}`}
           extra={[
             <>
               <div className="flex items-center space-x-4">
