@@ -9,6 +9,7 @@ import { BiCog } from "react-icons/bi";
 import { IoShareOutline } from "react-icons/io5";
 import { useAuth } from "@/components/util/context-user";
 import { RecentTransactions } from "@/components/transaction/recent-transactions";
+import { AvatarComponent } from "@/utils/avatar-component";
 
 const Dashboard = () => {
   const user = useAuth() as any;
@@ -28,12 +29,7 @@ const Dashboard = () => {
                   <div className="px-3 py-2 bg-white border border-gray-200 rounded-lg">
                     <div className="flex items-center">
                       <div className="relative flex-shrink-0 cursor-pointer">
-                        <Avatar
-                          size={60}
-                          className="object-cover w-10 h-10 rounded-full"
-                          src="https://picsum.photos/seed/6JySCJv/640/480"
-                          alt={`${user?.profile?.firstName ?? ''} ${user?.profile?.lastName ?? ''}`}
-                        />
+                        <AvatarComponent size={60} profile={user?.profile} />
                       </div>
 
                       <div className="ml-4 cursor-pointer">

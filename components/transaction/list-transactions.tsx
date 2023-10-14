@@ -6,6 +6,7 @@ import { BiDotsHorizontal } from "react-icons/bi";
 import { TransactionModel } from "@/types/transaction";
 import { formateFromNow, formatePrice } from "@/utils";
 import { capitalizeOneFirstLetter } from "@/utils/utils";
+import { AvatarComponent } from "@/utils/avatar-component";
 
 type Props = {
   item?: TransactionModel;
@@ -18,12 +19,7 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
       <tr key={index}>
         <td className="py-4 text-sm font-bold text-gray-900">
           <div className="flex items-center flex-1 min-w-0">
-            {item?.profileSend?.image ?
-              <Avatar size={50} src={item?.profileSend?.image} alt="" /> :
-              <Avatar size={50} style={{ backgroundColor: '#fde3', color: `${item?.profileSend?.color}` }}>
-                {capitalizeOneFirstLetter(String(item?.profileSend?.firstName), String(item?.profileSend?.lastName))}
-              </Avatar>
-            }
+            <AvatarComponent size={50} profile={item?.profileSend} />
             <div className="flex-1 min-w-0 ml-4">
               <p className="text-sm font-bold text-gray-900">
                 {item?.profileSend?.firstName} {item?.profileSend?.lastName}

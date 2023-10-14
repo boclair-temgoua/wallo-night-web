@@ -43,6 +43,21 @@ const ListPublicEvents: React.FC<Props> = ({ item }) => {
             <p className="ml-2 text-lg font-bold text-gray-900">
               {item?.currency}
             </p>
+            {/* <p className="ml-auto text-lg font-bold">
+              <ButtonInput
+                onClick={() => router.push(`/events/${item?.id}/checkout`)}
+                shape="default"
+                type="button"
+                size="normal"
+                loading={false}
+                color={"red"}
+              >
+                Riserva un posto
+              </ButtonInput>
+            </p> */}
+          </div>
+
+          <div className="mt-2 sm:mt-0">
             <p className="ml-auto text-lg font-bold">
               <ButtonInput
                 onClick={() => router.push(`/events/${item?.id}/checkout`)}
@@ -55,9 +70,6 @@ const ListPublicEvents: React.FC<Props> = ({ item }) => {
                 Riserva un posto
               </ButtonInput>
             </p>
-          </div>
-
-          <div className="mt-2 sm:mt-0">
             <h2 className="text-xl sm:text-base font-bold text-gray-900 mt-2 flex-1 hover:text-blue-600 transition-all">
               <Link href={`/events/${item?.slug}`} title={item?.title}>
                 <ReadMore html={String(item?.title ?? "")} value={60} />
