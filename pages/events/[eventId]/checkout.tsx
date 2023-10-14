@@ -67,7 +67,7 @@ const CheckoutView = () => {
 
 
 
-                          {item?.uploadsImage?.length > 0 ? (
+                          {item?.uploadsImage && item?.uploadsImage?.length > 0 ? (
                             <div className="mt-4 text-center justify-center mx-auto">
                               <Image preview={false} className="object-cover w-full h-full"
                                 src={`${viewOneFileUploadAPI({
