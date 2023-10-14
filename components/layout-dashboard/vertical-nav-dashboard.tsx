@@ -28,11 +28,11 @@ const MONETIZE_ITEMS: NavbarProps[] = [
 ];
 
 const SUPPORT_ITEMS = [
-  {
-    title: "Posts",
-    href: "/posts",
-    icon: <BiDetail className={classIcon} />,
-  },
+  // {
+  //   title: "Posts",
+  //   href: "/posts",
+  //   icon: <BiDetail className={classIcon} />,
+  // },
   {
     title: "Event",
     href: "/events",
