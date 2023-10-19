@@ -11,7 +11,7 @@ import "animate.css";
 import {
   QueryClient,
   QueryClientProvider,
-  Hydrate,
+  HydrationBoundary,
 } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import { ContextUserProvider } from "@/components/util/context-user";
@@ -20,17 +20,17 @@ const queryClient = new QueryClient();
 export default function App({ Component, pageProps }: AppProps) {
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
+      <HydrationBoundary state={pageProps.dehydratedState}>
         <ConfigProvider>
           <ContextUserProvider>
             <Component {...pageProps} />
 
             {Boolean(process.env.NEXT_PUBLIC_QUERY_DEV_TOOLS) && (
-              <ReactQueryDevtools initialIsOpen={false} />
+              <ReactQueryDevtools buttonPosition="bottom-left" initialIsOpen={false} />
             )}
           </ContextUserProvider>
         </ConfigProvider>
-      </Hydrate>
+      </HydrationBoundary>
     </QueryClientProvider>
   );
 }

@@ -51,7 +51,7 @@ const PostShow = () => {
   ) : dataEvents?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
-    dataEvents.pages
+    dataEvents?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <ListPublicEvents item={item} key={index} />

@@ -33,7 +33,7 @@ const CheckoutView = () => {
     eventId,
   });
 
-  if (status === "loading") {
+  if (status === "pending") {
     <LoadingFile />;
   }
 

@@ -66,7 +66,7 @@ const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
     );
   };
 
-  if (status === "loading") {
+  if (status === "pending") {
     <LoadingFile />;
   }
 

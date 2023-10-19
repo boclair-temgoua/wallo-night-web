@@ -56,7 +56,7 @@ const Contributors = () => {
   ) : dataContributor?.pages[0]?.data?.total <= 0 ? (
     ""
   ) : (
-    dataContributor.pages
+    dataContributor?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <>

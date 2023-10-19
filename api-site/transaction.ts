@@ -34,6 +34,6 @@ export const GetInfiniteTransactionsAPI = (payload: {
         status: status?.toUpperCase(),
         page: pageParam,
       }),
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };

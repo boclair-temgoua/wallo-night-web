@@ -18,8 +18,9 @@ export const CreateOrUpdateOneEventAPI = ({
 } = {}) => {
   const queryKey = ["events"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: EventFormModel & { eventId?: string }): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: EventFormModel & { eventId?: string }) => {
       const { eventId, newImageLists, newFileLists } = payload;
       let data = new FormData();
       data.append("location", `${payload.location ?? ""}`);
@@ -31,24 +32,20 @@ export const CreateOrUpdateOneEventAPI = ({
       data.append("urlRedirect", `${payload.urlRedirect}`);
       data.append("messageAfterPayment", `${payload.messageAfterPayment}`);
       data.append("description", `${payload.description ?? ""}`);
-
       payload?.fileList?.length > 0 &&
         payload?.fileList?.forEach((file: any) => {
           data.append("attachmentFiles", file?.originFileObj as RcFile);
         });
-
       payload?.imageList?.length > 0 &&
         payload?.imageList?.forEach((file: any) => {
           data.append("attachmentImages", file?.originFileObj as RcFile);
         });
-
       if (eventId) {
         const result = await makeApiCall({
           action: "updateOneUpload",
           body: { newImageLists, newFileLists },
           queryParams: { uploadableId: eventId, model: "EVENT" },
         });
-
         if (result) {
           await makeApiCall({
             action: "updateOneEvent",
@@ -56,7 +53,6 @@ export const CreateOrUpdateOneEventAPI = ({
             urlParams: { eventId },
           });
         }
-
         return "Ok";
       } else {
         return await makeApiCall({
@@ -65,27 +61,25 @@ export const CreateOrUpdateOneEventAPI = ({
         });
       }
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: (error, variables, context) => {
+      queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -99,37 +93,34 @@ export const DeleteOneEventAPI = ({
 } = {}) => {
   const queryKey = ["events"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: { eventId: string }): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: { eventId: string }) => {
       const { eventId } = payload;
-
       return await makeApiCall({
         action: "deleteOneEvent",
         urlParams: { eventId },
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
-
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
   return result;
 };
 
@@ -203,6 +194,6 @@ export const GetInfiniteEventsAPI = (payload: {
         status: status?.toUpperCase(),
         page: pageParam,
       }),
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };

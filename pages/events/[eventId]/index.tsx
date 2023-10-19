@@ -25,7 +25,7 @@ const PostShow = () => {
     eventSlug: eventSlug
   });
 
-  if (status === 'loading') {
+  if (status === 'pending') {
     <strong>Loading...</strong>
   }
 

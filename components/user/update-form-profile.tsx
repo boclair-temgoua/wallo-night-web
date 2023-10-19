@@ -1,23 +1,19 @@
 import React, { useEffect, useState } from "react";
-import { Avatar, Button, Select, Space, Upload } from "antd";
+import { Select, Space } from "antd";
 import {
+  GetOneProfileAPI,
   UpdateOneProfileAPI,
-  getOneFileProfileAPI,
-  getOneProfileAPI,
 } from "@/api-site/profile";
-import { useQuery } from "@tanstack/react-query";
 import { useForm, SubmitHandler, Controller } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
-import { SelectSearchInput } from "../ui/select-search-input";
-import { DateInput, TextAreaInput, TextInput } from "../ui";
+import { TextInput } from "../ui";
 import { ButtonInput } from "../ui/button-input";
 import { ProfileFormModel, arrayColors } from "@/types/profile.type";
 import {
   AlertDangerNotification,
   AlertSuccessNotification,
 } from "@/utils/alert-notification";
-import { UploadOutlined } from "@ant-design/icons";
 
 const { Option } = Select;
 
@@ -47,17 +43,11 @@ const UpdateFormProfile: React.FC<Props> = ({ profileId, user }) => {
     mode: "onChange",
   });
 
-  const fetchOneProfile = async () =>
-    await getOneProfileAPI({ profileId: profileId });
-  const { data: profileItem } = useQuery(
-    ["profile", profileId],
-    () => fetchOneProfile(),
-    {
-      refetchOnWindowFocus: false,
-      enabled: Boolean(profileId),
-    }
-  );
-  const profile: any = profileItem?.data;
+  const { data: profile, status } = GetOneProfileAPI({ profileId })
+
+  if (status === "pending") {
+    <strong>Loading...</strong>
+  }
 
   useEffect(() => {
     if (profile) {

@@ -9,44 +9,42 @@ export const UpdateOneOrderEventAPI = ({
   onSuccess?: () => void;
   onError?: (error: any) => void;
 } = {}) => {
-  const queryKey = ["events"];
+  const queryKey = ["order-events"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: {
       orderEventId: string;
       status?: StatusEvent;
-    }): Promise<any> => {
+    }) => {
       const { status, orderEventId } = payload;
       let data = new FormData();
       data.append("status", `${payload.status ?? ""}`);
-
       return await makeApiCall({
         action: "updateOneOrderEvent",
         body: { status },
         urlParams: { orderEventId },
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };

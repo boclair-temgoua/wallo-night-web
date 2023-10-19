@@ -62,7 +62,7 @@ const Events = () => {
       description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
     />
   ) : (
-    dataEvent.pages
+    dataEvent?.pages
       .flatMap((page: any) => page?.data?.value)
       .map((item, index) => (
         <ListEvents item={item} key={index} index={index} />

@@ -20,34 +20,33 @@ export const CreateOrUpdateOneContributorAPI = ({
 } = {}) => {
   const queryKey = ["contributors"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: ContributorFormModel): Promise<any> => {
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: ContributorFormModel) => {
       return await makeApiCall({
         action: "createOneContributor",
         body: payload,
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: (error, variables, context) => {
+      queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: () => {
+      queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -61,36 +60,34 @@ export const DeleteOneContributorAPI = ({
 } = {}) => {
   const queryKey = ["contributors"];
   const queryClient = useQueryClient();
-  const result = useMutation(
-    async (payload: { eventId: string }): Promise<any> => {
-      const { eventId } = payload;
-
+  const result = useMutation({
+    mutationKey: queryKey,
+    mutationFn: async (payload: { contributorId: string }) => {
+      const { contributorId } = payload;
       return await makeApiCall({
         action: "deleteOneContributor",
-        urlParams: { eventId },
+        urlParams: { contributorId },
       });
     },
-    {
-      onSettled: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onSuccess: async () => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onSuccess) {
-          onSuccess();
-        }
-      },
-      onError: async (error: any) => {
-        await queryClient.invalidateQueries({ queryKey });
-        if (onError) {
-          onError(error);
-        }
-      },
-    }
-  );
+    onError: async (error) => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onError) {
+        onError(error);
+      }
+    },
+    onSettled: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+    onSuccess: async () => {
+      await queryClient.invalidateQueries({ queryKey });
+      if (onSuccess) {
+        onSuccess();
+      }
+    },
+  });
 
   return result;
 };
@@ -125,6 +122,6 @@ export const GetInfiniteContributorsAPI = (payload: {
         sort,
         page: pageParam,
       }),
-    keepPreviousData: true,
+    initialPageParam: 0,
   });
 };
