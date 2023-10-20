@@ -1,16 +1,13 @@
-import React, { useState } from "react";
+import React from "react";
 import { SubmitHandler } from "react-hook-form";
 import * as yup from "yup";
 import { SelectSearchInput, TextInput } from "../ui";
 import { ButtonInput } from "../ui/button-input";
 import { AlertDangerNotification, AlertSuccessNotification } from "@/utils";
-import { UploadFile } from "antd";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { useRouter } from "next/router";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { CreateOrUpdateOneEventAPI } from "@/api-site/event";
-import { EventFormModel } from "@/types/event";
-import { ContributorFormModel, ContributorModel, arrayRoleContributors } from "@/types/contributor";
+import { ContributorFormModel, arrayRoleContributors } from "@/types/contributor";
 import { CreateOrUpdateOneContributorAPI } from "@/api-site/contributor";
 
 type Props = {

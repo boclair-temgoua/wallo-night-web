@@ -9,7 +9,6 @@ import { PlusOutlined } from "@ant-design/icons";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { useRouter } from "next/router";
 import { filterImageAndFile } from "@/utils/utils";
-import { useAuth } from "../util/context-user";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
 import { CreateOrUpdateOneEventAPI } from "@/api-site/event";
 import { EventFormModel } from "@/types/event";

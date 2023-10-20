@@ -2,7 +2,6 @@
 import React from "react";
 import { Button, Image } from "antd";
 import Link from "next/link";
-import { ShoppingCartOutlined } from "@ant-design/icons";
 import { ReadMore } from "@/utils/read-more";
 import { viewOneFileUploadAPI } from "@/api-site/upload";
 import { EventModel } from "@/types/event";

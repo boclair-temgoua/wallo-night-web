@@ -1,12 +1,5 @@
-import Link from "next/link";
-import { BiHomeCircle, BiSearch, BiBookContent } from "react-icons/bi";
-import { VscOpenPreview } from "react-icons/vsc";
 import { useRouter } from "next/router";
-import { Avatar, Button, Image } from "antd";
 import { usePathname } from "next/navigation";
-import { getCurrentUserFormToken } from "../util/context-user";
-import { useState } from "react";
-import { capitalizeFirstLetter, capitalizeOneFirstLetter } from "@/utils/utils";
 import { AvatarComponent } from "@/utils/avatar-component";
 
 export type NavbarProps = {

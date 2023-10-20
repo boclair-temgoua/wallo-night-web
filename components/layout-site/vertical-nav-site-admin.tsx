@@ -2,9 +2,6 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { TfiHome } from "react-icons/tfi";
 import { CgSmartHomeBoiler } from "react-icons/cg";
-import { MdImportContacts } from "react-icons/md";
-import { FaQuestion } from "react-icons/fa";
-import { TbArrowRoundaboutRight } from "react-icons/tb";
 import { SlEvent } from "react-icons/sl";
 import { useState } from "react";
 

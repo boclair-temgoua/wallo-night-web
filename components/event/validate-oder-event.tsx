@@ -5,7 +5,6 @@ import { Tag } from "antd";
 import { ButtonCancelInput } from "../ui/button-cancel-input";
 import { useRouter } from "next/router";
 import { useReactHookForm } from "../hooks/use-react-hook-form";
-import { EventFormModel } from "@/types/event";
 import { OrderEventModel } from "@/types/order-event";
 import { generateLongUUID } from "@/utils/generate-random";
 import { UpdateOneOrderEventAPI } from "@/api-site/order-event";

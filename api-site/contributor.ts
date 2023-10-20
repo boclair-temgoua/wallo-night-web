@@ -1,6 +1,5 @@
 import {
   ContributorFormModel,
-  ContributorModel,
   ResponseContributorModel,
 } from "@/types/contributor";
 import { makeApiCall } from "@/utils/get-url-end-point";

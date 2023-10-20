@@ -1,14 +1,12 @@
-import { ProfileFormModel } from "@/types/profile.type";
 import {
   UserLoginFormModel,
   UserRegisterFormModel,
   UserForgotPasswordFormModel,
   UserResetPasswordFormModel,
   UserModel,
-  NextStep,
 } from "@/types/user.type";
 import { makeApiCall } from "@/utils/get-url-end-point";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 
 export const loginUserAPI = async (
   payload: UserLoginFormModel

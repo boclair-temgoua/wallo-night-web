@@ -1,11 +1,10 @@
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React from "react";
-import { Avatar, Button } from "antd";
+import { Button } from "antd";
 import { ReadMore } from "@/utils/read-more";
 import { BiDotsHorizontal } from "react-icons/bi";
 import { formateFromNow } from "@/utils";
 import { ContributorModel } from "@/types/contributor";
-import { capitalizeOneFirstLetter } from "@/utils/utils";
 import { AvatarComponent } from "@/utils/avatar-component";
 
 type Props = {

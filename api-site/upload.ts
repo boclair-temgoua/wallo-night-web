@@ -1,4 +1,4 @@
-import { UploadFolderType, UploadModel } from "@/types/upload";
+import { UploadFolderType } from "@/types/upload";
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { useQuery } from "@tanstack/react-query";
 
