@@ -28,7 +28,7 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
                 {item?.profileSend?.email}
               </p>
               <p className="mt-1 text-sm font-medium text-gray-500 sm:hidden">
-                <ReadMore html={`${item?.profileSend?.email}`} value={10} />
+                <ReadMore html={`${item?.profileSend?.email}`} value={15} />
               </p>
               <p className="lg:hidden mt-1 text-sm font-medium text-gray-500">
                 {formateFromNow(item?.createdAt as Date)}
@@ -46,7 +46,7 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
         </td>
 
         <td className="hidden text-sm text-right font-medium text-gray-900 lg:table-cell">
-          <ReadMore html={`${item?.description}`} value={30} />
+          <ReadMore html={`${item?.description}`} value={40} />
         </td>
 
         <td className="hidden text-sm text-right font-medium text-gray-600 lg:table-cell">
