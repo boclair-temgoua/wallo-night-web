@@ -93,7 +93,7 @@ const ListOrderEvents: React.FC<Props> = ({ item, index }) => {
           {Number(item?.uploadsFile?.length) > 0 ?
             <div className="py-4 text-sm font-medium text-right text-gray-900">
               <Tooltip placement="bottomRight" title={"Download"}>
-                <a href={`${downloadOneFileUploadAPI({ folder: 'order-events', fileName: String(item?.uploadsFile[0]?.path) })}`}
+                <a href={`${viewOneFileUploadAPI({ folder: 'order-events', fileName: String(item?.uploadsFile[0]?.path) })}`}
                   className="ml-2 text-4xl text-gray-600 hover:text-indigo-600"
                 >
                   <GrDocumentDownload />
