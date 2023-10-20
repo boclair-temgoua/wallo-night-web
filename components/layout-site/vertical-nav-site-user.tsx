@@ -42,6 +42,21 @@ const VerticalNavSiteUser: React.FC<Props> = ({ user }) => {
       href: "/settings",
       icon: <BiCog className={classIcon} />,
     },
+    {
+      title: "Faq",
+      href: "/faqs",
+      icon: <FaQuestion className={classIcon} />,
+    },
+    {
+      title: "About",
+      href: "/about",
+      icon: <TbArrowRoundaboutRight className={classIcon} />,
+    },
+    {
+      title: "Contact Us",
+      href: "/contact-us",
+      icon: <MdImportContacts className={classIcon} />,
+    },
   ]);
 
 
@@ -70,7 +85,7 @@ const VerticalNavSiteUser: React.FC<Props> = ({ user }) => {
               );
             })}
           </nav>
-          
+
         </div>
       </div>
     </>

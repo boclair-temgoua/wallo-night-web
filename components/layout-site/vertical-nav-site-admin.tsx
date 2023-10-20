@@ -44,21 +44,6 @@ const VerticalNavSiteAdmin: React.FC<Props> = ({ user }) => {
       href: "/events/our-events",
       icon: <SlEvent className={classIcon} />,
     },
-    {
-      title: "Faq",
-      href: "/faqs",
-      icon: <FaQuestion className={classIcon} />,
-    },
-    {
-      title: "About",
-      href: "/about",
-      icon: <TbArrowRoundaboutRight className={classIcon} />,
-    },
-    {
-      title: "Contact Us",
-      href: "/contact-us",
-      icon: <MdImportContacts className={classIcon} />,
-    },
   ]);
 
 
