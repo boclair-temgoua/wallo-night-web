@@ -72,7 +72,7 @@ const Dashboard = () => {
                   /> */}
 
 
-                  {user?.id ? <RecentTransactions userId={user?.profile?.userId} /> : null}
+                  {user?.id ? <RecentTransactions /> : null}
 
 
                 </div>

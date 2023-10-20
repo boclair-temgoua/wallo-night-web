@@ -81,16 +81,16 @@ const Login = () => {
     <>
       <LayoutSite title="Log In">
         <div className="w-full max-w-sm p-6 m-auto mt-10 md:mt-16 mx-auto bg-white rounded-lg shadow-md">
-          <div className="flex justify-center mx-auto">
+          {/* <div className="flex justify-center mx-auto">
             <img
               className="w-auto h-7 sm:h-8"
               src="https://merakiui.com/images/logo.svg"
               alt=""
             />
-          </div>
+          </div> */}
           <div className="flex justify-center mx-auto">
             <h6 className="mt-3 text-xl text-center font-bold">
-              {`Log in to your account`}
+              {`Log in`}
             </h6>
           </div>
 

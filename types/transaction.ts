@@ -14,6 +14,7 @@ export type TransactionModel = {
   model: ModelType;
   contributionId: string;
   giftId: string;
+  type: string;
   campaignId: string;
   userSendId: string;
   userReceiveId: string;

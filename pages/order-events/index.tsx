@@ -23,7 +23,7 @@ const OrderEvents = () => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteOrderEventsAPI({
-    // userId: userStorage?.id,
+    userId: userStorage?.id,
     take: 10,
     sort: "DESC",
     queryKey: ["order-events", "infinite"],
@@ -57,8 +57,8 @@ const OrderEvents = () => {
     <strong>Error find data please try again...</strong>
   ) : dataEvent?.pages[0]?.data?.total <= 0 ? (
     <EmptyData
-      title="Add your first listing to get started"
-      description={`Your listing will appear on your page and be available for supporters to book. You can edit them anytime.`}
+      title=""
+      description={``}
     />
   ) : (
     dataEvent?.pages

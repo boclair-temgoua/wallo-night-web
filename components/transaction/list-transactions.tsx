@@ -46,7 +46,7 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
         </td>
 
         <td className="hidden text-sm text-right font-medium text-gray-900 lg:table-cell">
-          {item?.description ?? ""}
+          <ReadMore html={`${item?.description}`} value={30} />
         </td>
 
         <td className="hidden text-sm text-right font-medium text-gray-600 lg:table-cell">
@@ -61,16 +61,16 @@ const ListTransactions: React.FC<Props> = ({ item, index }) => {
             size="small"
           />
           <div className="mt-1 lg:hidden pt-1">
-            <p className="inline-flex text-sm font-bold text-gray-900">
+            <div className="inline-flex items-center justify-end text-gray-900">
+              {item?.type}
+            </div>
+            <p className="ml-2 inline-flex text-sm font-bold text-gray-900">
               {formatePrice({
                 value: Number(item?.amount ?? 0),
                 isDivide: true,
               })}
               &nbsp;{item?.currency}
             </p>
-            {/* <div className="inline-flex items-center justify-end mt-1">
-                                      07 January, 2022
-                                    </div> */}
           </div>
         </td>
       </tr>
