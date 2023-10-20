@@ -7,11 +7,12 @@ import {
   BiCog,
   BiLockOpen,
 } from "react-icons/bi";
-import { BsShop } from "react-icons/bs";
+import { BsCalendar4Event, BsShop } from "react-icons/bs";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { SlEvent } from "react-icons/sl";
 import { LiaMoneyBillWaveSolid } from "react-icons/lia";
+import { MdOutlineEventAvailable } from "react-icons/md";
 
 export type NavbarProps = {
   title: string;
@@ -25,14 +26,14 @@ const classIcon = "flex-shrink-0 w-5 h-5 mr-4";
 
 const SETTINGS_ITEMS = [
   {
-    title: "Events",
-    href: "/events/our-events",
-    icon: <BiHomeCircle className={classIcon} />,
-  },
-  {
     title: "Order event",
     href: "/order-events",
     icon: <LiaMoneyBillWaveSolid className={classIcon} />,
+  },
+  {
+    title: "Events",
+    href: "/events/our-events",
+    icon: <MdOutlineEventAvailable className={classIcon} />,
   },
   {
     title: "Account",
@@ -60,7 +61,7 @@ const VerticalNavDashboardUser: React.FC<Props> = ({ user }) => {
       <div className="flex flex-col justify-between flex-1 h-full px-4 overflow-x-scroll">
         <div className="space-y-4">
           <>
-            <nav className="flex-1 mt-4 space-y-1">
+            <nav className="flex-1 mt-4 space-y-4">
               {settingItems.map((item: any, index: number) => {
                 const isActive = pathname.startsWith(item.href);
                 return (
