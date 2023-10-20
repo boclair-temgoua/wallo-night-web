@@ -50,10 +50,12 @@ const Login = () => {
       const { data: user } = await loginUserAPI({ email, password });
 
       if (user?.permission === "ADMIN") {
+        router.push(`${`/dashboard`}`)
         window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`
       }
 
       if (user?.permission === "USER") {
+        router.push(`${`/order-events`}`);
         window.location.href = `${process.env.NEXT_PUBLIC_SITE}/order-events`;
       }
       localStorage.setItem(
