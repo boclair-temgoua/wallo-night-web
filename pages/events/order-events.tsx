@@ -3,21 +3,36 @@ import LayoutDashboard from "@/components/layout-dashboard";
 import { useRouter } from "next/router";
 import { useInView } from "react-intersection-observer";
 import { useAuth } from "@/components/util/context-user";
-import { useEffect } from "react";
-import { EmptyData } from "@/components/ui/empty-data";
-import { ButtonInput } from "@/components/ui/button-input";
 import { LoadingFile } from "@/components/ui/loading-file";
-import { GetInfiniteOrderEventsAPI } from "@/api-site/order-event";
-import { ListOrderEvents } from "@/components/order-event/list-order-events";
+import { GetInfiniteOrderEventsAPI, GetOneOrderEventAPI } from "@/api-site/order-event";
 import { useQrcodeScanner } from "@/components/hooks/use-qrcode-scanner ";
 import { HorizontalNavEvent } from "@/components/event/horizontal-nav-event";
+import { ButtonInput, EmptyData } from "@/components/ui";
+import { ListOrderEvents } from "@/components/order-event/list-order-events";
+import { useEffect } from "react";
 
 const EventOrderEvents = () => {
-  const router = useRouter();
   const { ref, inView } = useInView();
   const { userStorage } = useAuth() as any;
+  const { push } = useRouter();
 
   const { scanResult } = useQrcodeScanner()
+
+  const {
+    isError: isErrorOrderEvent,
+    isLoading: isLoadingOrderEvent,
+    data: item
+  } = GetOneOrderEventAPI({
+    orderEventId: `${scanResult}`,
+  });
+
+  isLoadingOrderEvent ? (
+    <LoadingFile />
+  ) : isErrorOrderEvent ? (
+    <strong>Error find data please try again...</strong>
+  ) : (
+    <>{scanResult ? push(`/events/${item?.id} / validate`) : null}</>
+  );
 
   const {
     isLoading: isLoadingEvent,
@@ -27,7 +42,7 @@ const EventOrderEvents = () => {
     hasNextPage,
     fetchNextPage,
   } = GetInfiniteOrderEventsAPI({
-    userId: userStorage?.id,
+    organizationId: userStorage?.organizationId,
     take: 10,
     sort: "DESC",
     queryKey: ["order-events", "infinite"],
@@ -71,7 +86,6 @@ const EventOrderEvents = () => {
         <ListOrderEvents item={item} key={index} index={index} />
       ))
   );
-
   return (
     <>
       <LayoutDashboard title={"Order Events"}>
@@ -86,10 +100,42 @@ const EventOrderEvents = () => {
                 <div className="flow-root">
                   <div className="mt-8 px-3 py-2 bg-white border border-gray-200 rounded-lg">
 
-                    {scanResult ? <div>{scanResult}</div> : <div id="reader-qrcode-scaner"></div>}
+                    <div id="reader-qrcode-scaner"></div>
 
                   </div>
 
+                </div>
+                <div className="flow-root">
+                  <div className="mt-4 px-3 py-2 bg-white border border-gray-200 rounded-lg">
+
+                    <div className="px-4 py-8">
+
+                      <div className="divide-y divide-gray-200">
+                        {dataTableEvents}
+                      </div>
+
+                    </div>
+
+                  </div>
+
+                  {hasNextPage && (
+                    <div className="mt-4 text-center justify-center mx-auto">
+                      <div className="mt-4 sm:mt-0">
+                        <ButtonInput
+                          ref={ref}
+                          onClick={() => fetchNextPage()}
+                          shape="default"
+                          type="button"
+                          size="large"
+                          loading={isFetchingNextPage ? true : false}
+                          color={"indigo"}
+                          minW="fit"
+                        >
+                          Load More
+                        </ButtonInput>
+                      </div>
+                    </div>
+                  )}
 
                 </div>
               </div>

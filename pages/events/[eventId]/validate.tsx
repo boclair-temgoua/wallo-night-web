@@ -15,8 +15,6 @@ const ValidateView = () => {
   const user = useAuth() as any;
   const { back, query, push } = useRouter();
   const orderEventId = String(query?.eventId);
-  const {
-  } = useForm();
   const { isError: isErrorOrderEvent,
     isLoading: isLoadingOrderEvent,
     data: item
