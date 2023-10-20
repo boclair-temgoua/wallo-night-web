@@ -31,7 +31,7 @@ const EventOrderEvents = () => {
   ) : isErrorOrderEvent ? (
     <strong>Error find data please try again...</strong>
   ) : (
-    <>{scanResult ? push(`/events/${item?.id} / validate`) : null}</>
+    <>{scanResult ? push(`/events/${item?.id}/validate`) : null}</>
   );
 
   const {
