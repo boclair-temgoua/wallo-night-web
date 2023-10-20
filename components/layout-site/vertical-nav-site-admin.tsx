@@ -31,7 +31,7 @@ const SUPPORT_ITEMS = [
 ];
 
 
-const VerticalNavSite: React.FC<Props> = ({ user }) => {
+const VerticalNavSiteAdmin: React.FC<Props> = ({ user }) => {
   const pathname = usePathname();
   const [navigationItems] = useState<NavbarProps[]>([
     {
@@ -112,4 +112,4 @@ const VerticalNavSite: React.FC<Props> = ({ user }) => {
   );
 };
 
-export { VerticalNavSite };
+export { VerticalNavSiteAdmin };

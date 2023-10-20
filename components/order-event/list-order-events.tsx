@@ -51,14 +51,14 @@ const ListOrderEvents: React.FC<Props> = ({ item, index }) => {
 
             <div className="flex mt-4 items-center">
               {item?.event?.title ? (
-                <Link href={`/events/${item?.event?.slug}`} className="text-lg font-bold text-gray-600">
+                <span className="text-lg font-bold text-gray-600">
                   <ReadMore html={String(item?.event?.title ?? "")} value={100} />
-                </Link>
+                </span>
               ) : null}
             </div>
             <div className="flex mt-4 font-bold items-center">
               <span className="font-normal text-sm">
-                No: {item?.code}
+                {item?.code}
               </span>
             </div>
 
@@ -94,7 +94,7 @@ const ListOrderEvents: React.FC<Props> = ({ item, index }) => {
             <div className="py-4 text-sm font-medium text-right text-gray-900">
               <Tooltip placement="bottomRight" title={"Download"}>
                 <a href={`${downloadOneFileUploadAPI({ folder: 'order-events', fileName: String(item?.uploadsFile[0]?.path) })}`}
-                  className="ml-2 text-lg text-gray-600 hover:text-indigo-600"
+                  className="ml-2 text-4xl text-gray-600 hover:text-indigo-600"
                 >
                   <GrDocumentDownload />
                 </a>

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import { Button } from "antd";
 import { usePathname } from "next/navigation";
+import { AvatarComponent } from "@/utils/avatar-component";
 
 export type NavbarProps = {
   title: string;
@@ -72,15 +73,12 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
                       key={index}
                       href={`${item.href}`}
                       title={item?.title}
-                      className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${
-                        isActive
-                          ? `text-${
-                              user?.profile?.color ?? "indigo"
-                            }-600 border-${
-                              user?.profile?.color ?? "indigo"
-                            }-600`
-                          : "text-gray-700 hover:border-gray-300 hover:text-gray-900"
-                      } `}
+                      className={`inline-flex items-center px-1 pt-1 text-sm font-medium  transition-all duration-200 border-b-2  ${isActive
+                        ? `text-${user?.profile?.color ?? "indigo"
+                        }-600 border-${user?.profile?.color ?? "indigo"
+                        }-600`
+                        : "text-gray-700 hover:border-gray-300 hover:text-gray-900"
+                        } `}
                     >
                       {item?.icon}
 
@@ -93,31 +91,48 @@ const HorizontalNavSite: React.FC<Props> = ({ user, showDrawer }) => {
             </div>
 
             <div className="flex items-center justify-end">
-
               <div className="flex items-center space-x-6 sm:ml-5">
-                <div className="relative">
-                  <Button
-                    onClick={() => {
-                      router.push(`${`/login`}`);
-                    }}
-                    size="middle"
+                {user?.profile ?
+                  <button
+                    type="button"
+                    className="flex items-center max-w-xs rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-600"
                   >
-                    Log In
-                  </Button>
-                </div>
-                <div className="relative">
-                  <Button
-                    onClick={() => {
-                      router.push(`${`/register`}`);
-                    }}
-                    size="middle"
-                    type="primary"
-                    danger
-                  >
-                    Sign Up
-                  </Button>
-                </div>
+                    <AvatarComponent
+                      profile={user?.profile}
+                      className="object-cover bg-gray-300 rounded-full w-9 h-9"
+                    />
+                    <p className="ml-1 text-sm font-bold text-gray-900">
+                      {user?.profile?.firstName} {user?.profile?.lastName}
+                    </p>
+                  </button>
+                  :
+                  <>
+                    <div className="relative">
+                      <Button
+                        onClick={() => {
+                          router.push(`${`/login`}`);
+                        }}
+                        size="middle"
+                      >
+                        Log In
+                      </Button>
+                    </div>
+                    <div className="relative">
+                      <Button
+                        onClick={() => {
+                          router.push(`${`/register`}`);
+                        }}
+                        size="middle"
+                        type="primary"
+                        danger
+                      >
+                        Sign Up
+                      </Button>
+                    </div>
+                  </>
+                }
               </div>
+
             </div>
           </div>
         </div>

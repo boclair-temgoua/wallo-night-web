@@ -71,7 +71,7 @@ const VerticalNavDashboardAdmin: React.FC<Props> = ({ user }) => {
     <>
       <div className="flex flex-col justify-between flex-1 h-full px-4 overflow-x-scroll">
         <div className="space-y-4">
-          <nav className="flex-1 space-y-1">
+          <nav className="flex-1 space-y-2">
             {navigationItems.map((item: any, index: number) => {
               const isActive = pathname.startsWith(item.href);
               return (
@@ -98,7 +98,7 @@ const VerticalNavDashboardAdmin: React.FC<Props> = ({ user }) => {
               Monetize
             </p>
 
-            <nav className="flex-1 mt-4 space-y-1">
+            <nav className="flex-1 mt-4 space-y-2">
               {monetizeItems.map((item: any, index: number) => {
                 const isActive = pathname.startsWith(item.href);
                 return (
@@ -124,7 +124,7 @@ const VerticalNavDashboardAdmin: React.FC<Props> = ({ user }) => {
             <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
               Support
             </p>
-            <nav className="flex-1 mt-4 space-y-1">
+            <nav className="flex-1 mt-4 space-y-2">
               {supportItems.map((item: any, index: number) => {
                 const isActive = pathname.startsWith(item.href);
                 return (
@@ -150,7 +150,7 @@ const VerticalNavDashboardAdmin: React.FC<Props> = ({ user }) => {
             <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
               Settings
             </p>
-            <nav className="flex-1 mt-4 space-y-1">
+            <nav className="flex-1 mt-4 space-y-2">
               {settingItems.map((item: any, index: number) => {
                 const isActive = pathname.startsWith(item.href);
                 return (

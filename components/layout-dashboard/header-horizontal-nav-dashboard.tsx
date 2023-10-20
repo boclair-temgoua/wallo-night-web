@@ -24,15 +24,15 @@ const HeaderHorizontalNavDashboard: React.FC<Props> = ({ user }) => {
       {/* Fix Drawer */}
 
       <Drawer
-        title=""
-        placement="right"
+        title={process.env.NEXT_PUBLIC_NAME_SITE}
+        placement="left"
         closable={true}
         onClose={onClose}
         open={open}
       >
         <div className="flex flex-col pt-5 overflow-y-auto">
-        {user?.permission === 'ADMIN' && <VerticalNavDashboardAdmin user={user} />}
-          
+          {user?.permission === 'ADMIN' && <VerticalNavDashboardAdmin user={user} />}
+
           {user?.permission === 'USER' && <VerticalNavDashboardUser user={user} />}
         </div>
       </Drawer>
