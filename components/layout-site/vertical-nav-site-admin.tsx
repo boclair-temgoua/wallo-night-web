@@ -4,6 +4,7 @@ import { TfiHome } from "react-icons/tfi";
 import { CgSmartHomeBoiler } from "react-icons/cg";
 import { SlEvent } from "react-icons/sl";
 import { useState } from "react";
+import { LiaMoneyBillWaveSolid } from "react-icons/lia";
 
 export type NavbarProps = {
   title: string;
@@ -38,7 +39,7 @@ const VerticalNavSiteAdmin: React.FC<Props> = ({ user }) => {
     },
     {
       title: "Events",
-      href: "/events/our-events",
+      href: "/events",
       icon: <SlEvent className={classIcon} />,
     },
   ]);

@@ -10,6 +10,7 @@ import {
 import { BsShop } from "react-icons/bs";
 import { useState } from "react";
 import { useRouter } from "next/router";
+import { LiaMoneyBillWaveSolid } from "react-icons/lia";
 
 export type NavbarProps = {
   title: string;
@@ -30,7 +31,7 @@ const MONETIZE_ITEMS: NavbarProps[] = [
 
 const SUPPORT_ITEMS = [
   {
-    title: "Event",
+    title: "Events",
     href: "/events",
     icon: <BsShop className={classIcon} />,
   },

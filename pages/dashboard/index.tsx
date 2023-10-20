@@ -1,6 +1,6 @@
 import { PrivateComponent } from "@/components/util/private-component";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Avatar } from "antd";
 import { useRouter } from "next/router";
 import { arrayTransactions } from "@/components/mock";
@@ -11,12 +11,19 @@ import { useAuth } from "@/components/util/context-user";
 import { RecentTransactions } from "@/components/transaction/recent-transactions";
 import { AvatarComponent } from "@/utils/avatar-component";
 
+
 const Dashboard = () => {
   const user = useAuth() as any;
   const router = useRouter();
   const [donationsArrays] = useState(arrayTransactions || []);
 
   console.log('user ========>', user)
+
+
+
+
+
+
 
   return (
     <>
@@ -60,6 +67,7 @@ const Dashboard = () => {
                         isDivide: true,
                       }) ?? ""} EUR</p>
                     </div>
+
                   </div>
 
                   {/* <QrScanner

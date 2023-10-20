@@ -10,6 +10,7 @@ import { ButtonInput } from "@/components/ui/button-input";
 import { LoadingFile } from "@/components/ui/loading-file";
 import { GetInfiniteEventsAPI } from "@/api-site/event";
 import { ListEvents } from "@/components/event/list-events";
+import { HorizontalNavEvent } from "@/components/event/horizontal-nav-event";
 
 const Events = () => {
   const router = useRouter();
@@ -78,7 +79,7 @@ const Events = () => {
 
               <div className="px-4 mx-auto mt-6 sm:px-6 md:px-8">
 
-
+              <HorizontalNavEvent />
 
                 <div className="flow-root">
                   <div className="mt-8 overflow-hidden bg-white border border-gray-200 rounded-lg">

@@ -6,7 +6,9 @@ import {
 import { useState } from "react";
 import { useRouter } from "next/router";
 import { LiaMoneyBillWaveSolid } from "react-icons/lia";
-import { MdOutlineEventAvailable } from "react-icons/md";
+import { MdImportContacts, MdOutlineEventAvailable } from "react-icons/md";
+import { FaQuestion } from "react-icons/fa";
+import { TbArrowRoundaboutRight } from "react-icons/tb";
 
 export type NavbarProps = {
   title: string;
@@ -18,7 +20,7 @@ export type NavbarProps = {
 const classIcon = "flex-shrink-0 w-5 h-5 mr-4";
 
 
-const SETTINGS_ITEMS = [
+export const SETTINGS_ITEMS = [
   {
     title: "Order event",
     href: "/order-events",
@@ -33,6 +35,21 @@ const SETTINGS_ITEMS = [
     title: "Account",
     href: "/settings",
     icon: <BiCog className={classIcon} />,
+  },
+  {
+    title: "Faq",
+    href: "/faqs",
+    icon: <FaQuestion className={classIcon} />,
+  },
+  {
+    title: "About",
+    href: "/about",
+    icon: <TbArrowRoundaboutRight className={classIcon} />,
+  },
+  {
+    title: "Contact Us",
+    href: "/contact-us",
+    icon: <MdImportContacts className={classIcon} />,
   },
 ];
 

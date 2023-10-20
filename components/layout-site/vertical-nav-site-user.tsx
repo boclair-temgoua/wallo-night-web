@@ -6,6 +6,7 @@ import { TbArrowRoundaboutRight } from "react-icons/tb";
 import { useState } from "react";
 import { LiaMoneyBillWaveSolid } from "react-icons/lia";
 import { BiCog } from "react-icons/bi";
+import { SETTINGS_ITEMS } from "../layout-dashboard/vertical-nav-dashboard-user";
 
 export type NavbarProps = {
   title: string;
@@ -23,38 +24,7 @@ interface Props {
 
 const VerticalNavSiteUser: React.FC<Props> = ({ user }) => {
   const pathname = usePathname();
-  const [navigationItems] = useState<NavbarProps[]>([
-    {
-      title: "Order event",
-      href: "/order-events",
-      icon: <LiaMoneyBillWaveSolid className={classIcon} />,
-    },
-    {
-      title: "Events",
-      href: "/events/our-events",
-      icon: <MdOutlineEventAvailable className={classIcon} />,
-    },
-    {
-      title: "Account",
-      href: "/settings",
-      icon: <BiCog className={classIcon} />,
-    },
-    {
-      title: "Faq",
-      href: "/faqs",
-      icon: <FaQuestion className={classIcon} />,
-    },
-    {
-      title: "About",
-      href: "/about",
-      icon: <TbArrowRoundaboutRight className={classIcon} />,
-    },
-    {
-      title: "Contact Us",
-      href: "/contact-us",
-      icon: <MdImportContacts className={classIcon} />,
-    },
-  ]);
+  const [navigationItems] = useState<NavbarProps[]>(SETTINGS_ITEMS);
 
 
   return (
