@@ -1,6 +1,16 @@
-import { OrderEventModel, StatusEvent } from "@/types/order-event";
+import {
+  OrderEventModel,
+  ResponseOrderEventModel,
+  StatusEvent,
+} from "@/types/order-event";
 import { makeApiCall } from "@/utils/get-url-end-point";
-import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { PaginationRequest, SortModel } from "@/utils/pagination-item";
+import {
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 
 export const UpdateOneOrderEventAPI = ({
   onSuccess,
@@ -64,4 +74,41 @@ export const GetOneOrderEventAPI = (payload: {
   });
 
   return { data: data?.data as OrderEventModel, isError, isLoading, status };
+};
+
+export const getOrderEventsAPI = async (
+  payload: {
+    userId?: string;
+    organizationId?: string;
+  } & PaginationRequest
+): Promise<{ data: ResponseOrderEventModel }> => {
+  return await makeApiCall({
+    action: "getOrderEvents",
+    queryParams: payload,
+  });
+};
+
+export const GetInfiniteOrderEventsAPI = (payload: {
+  organizationId?: string;
+  userId?: string;
+  take: number;
+  status?: string;
+  sort: SortModel;
+  typeIds?: string[];
+  queryKey: string[];
+}) => {
+  const { organizationId, userId, take, sort, status, queryKey } = payload;
+  return useInfiniteQuery({
+    queryKey: queryKey,
+    getNextPageParam: (lastPage: any) => lastPage.data.next_page,
+    queryFn: async ({ pageParam = 0 }) =>
+      await getOrderEventsAPI({
+        userId,
+        organizationId,
+        take,
+        sort,
+        page: pageParam,
+      }),
+    initialPageParam: 0,
+  });
 };

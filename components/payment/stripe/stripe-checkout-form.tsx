@@ -94,7 +94,7 @@ const StripeCheckoutForm: React.FC<StripeProps> = ({ data, paymentModel }) => {
       }
 
       await CreateOnPaymentPI({
-        data: { ...data, paymentMethod },
+        data: { ...data, reference: newReference, paymentMethod },
         paymentModel,
       });
 

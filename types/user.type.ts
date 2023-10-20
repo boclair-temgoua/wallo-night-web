@@ -31,6 +31,7 @@ export type UserModel = {
   createdAt: Date;
   email: string;
   id: string;
+  permission: string;
   organizationInUtilizationId: string;
   profileId: string;
   profile: {

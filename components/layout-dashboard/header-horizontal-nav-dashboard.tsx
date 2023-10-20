@@ -1,7 +1,8 @@
 import { Drawer } from "antd";
-import { VerticalNavDashboard } from "./vertical-nav-dashboard";
+import { VerticalNavDashboardAdmin } from "./vertical-nav-dashboard-admin";
 import { useState } from "react";
 import { HorizontalNavDashboard } from "./horizontal-nav-dashboard";
+import { VerticalNavDashboardUser } from "./vertical-nav-dashboard-user";
 
 interface Props {
   user?: any;
@@ -30,7 +31,9 @@ const HeaderHorizontalNavDashboard: React.FC<Props> = ({ user }) => {
         open={open}
       >
         <div className="flex flex-col pt-5 overflow-y-auto">
-          <VerticalNavDashboard user={user} />
+        {user?.permission === 'ADMIN' && <VerticalNavDashboardAdmin user={user} />}
+          
+          {user?.permission === 'USER' && <VerticalNavDashboardUser user={user} />}
         </div>
       </Drawer>
     </>

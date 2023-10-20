@@ -166,6 +166,10 @@ export const apiEndpoints: ClientApiMethods = {
   },
 
   /****************** Order Events route */
+  getOrderEvents: {
+    endpoint: `${baseUrl}/order-events`,
+    method: GET,
+  },
   getOneOrderEvent: {
     endpoint: `${baseUrl}/order-events/view`,
     method: GET,

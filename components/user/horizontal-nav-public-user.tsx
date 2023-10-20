@@ -2,7 +2,7 @@ import { usePathname } from "next/navigation";
 import React, { useState } from "react";
 import Link from "next/link";
 import { useAuth } from "../util/context-user";
-import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard";
+import { NavbarProps } from "../layout-dashboard/vertical-nav-dashboard-admin";
 import { useRouter } from "next/router";
 import { Avatar } from "antd";
 import { ButtonInput } from "../ui/button-input";

@@ -1,4 +1,4 @@
-export type UploadFolderType = "posts" | "events" | "products";
+export type UploadFolderType = "posts" | "order-events" | "events" | "products";
 
 export type UploadModel = {
   createdAt: Date;

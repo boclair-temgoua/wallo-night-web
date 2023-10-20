@@ -29,11 +29,6 @@ const MONETIZE_ITEMS: NavbarProps[] = [
 ];
 
 const SUPPORT_ITEMS = [
-  // {
-  //   title: "Posts",
-  //   href: "/posts",
-  //   icon: <BiDetail className={classIcon} />,
-  // },
   {
     title: "Event",
     href: "/events",
@@ -53,7 +48,7 @@ interface Props {
   user?: any;
 }
 
-const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
+const VerticalNavDashboardAdmin: React.FC<Props> = ({ user }) => {
   const pathname = usePathname();
   const router = useRouter();
   const [navigationItems] = useState<NavbarProps[]>([
@@ -96,6 +91,7 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
               );
             })}
           </nav>
+          
 
           <>
             <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
@@ -205,4 +201,4 @@ const VerticalNavDashboard: React.FC<Props> = ({ user }) => {
   );
 };
 
-export { VerticalNavDashboard };
+export { VerticalNavDashboardAdmin };

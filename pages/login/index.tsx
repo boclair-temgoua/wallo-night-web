@@ -48,25 +48,23 @@ const Login = () => {
 
     try {
       const { data: user } = await loginUserAPI({ email, password });
-      // if (user?.nextStep === "SETTING_PROFILE") {
-      //   router.push(`${`/register/${user?.id}/setting-profile`}`);
-      // } else if (user?.nextStep === "SETTING_INTEREST") {
-      //   router.push(`${`/register/${user?.id}/setting-interest`}`);
-      // } else if (user?.nextStep === "CONFIRM_EMAIL") {
-      //   await resendCodeAPI({ userId: user?.id });
-      //   router.push(`${`/register/${user?.id}/confirm-account`}`);
-      // } else if (user?.nextStep === "COMPLETE_REGISTRATION") {
-      //   router.push(`${`/dashboard`}`);
-      //   window.location.reload();
-      // }
+
       localStorage.setItem(
         String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
         JSON.stringify(user?.accessToken)
       );
-      router.push(`${`/dashboard`}`);
+
+      if (user?.permission === "ADMIN") {
+        router.push(`${`/dashboard`}`)
+        window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+      }
+
+      if (user?.permission === "USER") {
+        router.push(`${`/dashboard`}`);
+        window.location.href = `${process.env.NEXT_PUBLIC_SITE}/order-events`;
+      }
       setHasErrors(false);
       setLoading(false);
-      window.location.reload();
     } catch (error: any) {
       setHasErrors(true);
       setLoading(false);
