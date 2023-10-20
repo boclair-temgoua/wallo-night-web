@@ -49,11 +49,6 @@ const Login = () => {
     try {
       const { data: user } = await loginUserAPI({ email, password });
 
-      localStorage.setItem(
-        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-        JSON.stringify(user?.accessToken)
-      );
-
       if (user?.permission === "ADMIN") {
         router.push(`${`/dashboard`}`)
         window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`
@@ -63,6 +58,10 @@ const Login = () => {
         router.push(`${`/dashboard`}`);
         window.location.href = `${process.env.NEXT_PUBLIC_SITE}/order-events`;
       }
+      localStorage.setItem(
+        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
+        JSON.stringify(user?.accessToken)
+      );
       setHasErrors(false);
       setLoading(false);
     } catch (error: any) {
