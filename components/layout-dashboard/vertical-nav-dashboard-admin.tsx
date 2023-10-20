@@ -65,7 +65,8 @@ const VerticalNavDashboardAdmin: React.FC<Props> = ({ user }) => {
 
   const logoutUser = () => {
     localStorage.removeItem(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
-    window.location.href = `${process.env.NEXT_PUBLIC_SITE}`
+    router.push(`${`/`}`);
+    window.location.reload()
   }
   return (
     <>
@@ -91,7 +92,7 @@ const VerticalNavDashboardAdmin: React.FC<Props> = ({ user }) => {
               );
             })}
           </nav>
-          
+
 
           <>
             <p className="px-4 text-xs font-semibold tracking-widest text-gray-400 uppercase">
