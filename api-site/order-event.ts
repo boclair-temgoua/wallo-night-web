@@ -101,7 +101,7 @@ export const GetInfiniteOrderEventsAPI = (payload: {
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: async ({ pageParam = 0 }) =>
+    queryFn: async ({ pageParam = 1 }) =>
       await getOrderEventsAPI({
         userId,
         organizationId,
@@ -109,6 +109,6 @@ export const GetInfiniteOrderEventsAPI = (payload: {
         sort,
         page: pageParam,
       }),
-    initialPageParam: 0,
+    initialPageParam: 1,
   });
 };

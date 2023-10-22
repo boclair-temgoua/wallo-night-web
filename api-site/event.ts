@@ -186,7 +186,7 @@ export const GetInfiniteEventsAPI = (payload: {
   return useInfiniteQuery({
     queryKey: queryKey,
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
-    queryFn: async ({ pageParam = 0 }) =>
+    queryFn: async ({ pageParam = 1 }) =>
       await getEventsAPI({
         organizationId,
         take,
@@ -194,6 +194,6 @@ export const GetInfiniteEventsAPI = (payload: {
         status: status?.toUpperCase(),
         page: pageParam,
       }),
-    initialPageParam: 0,
+    initialPageParam: 1,
   });
 };
