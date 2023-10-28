@@ -10,7 +10,7 @@ import {
 import { UserModel } from "@/types/user.type";
 import { useQuery } from "@tanstack/react-query";
 import { GetOneUserPrivateAPI } from "@/api-site/user";
-import jwt_decode from "jwt-decode";
+import { jwtDecode } from "jwt-decode";
 import { Spin } from "antd";
 import { LoadingOutlined } from "@ant-design/icons";
 import { LoadingFile } from "@/components/ui/loading-file";
@@ -26,11 +26,11 @@ export const getCurrentUserFormToken = () => {
   const token =
     typeof window !== "undefined"
       ? window.localStorage.getItem(
-          String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
-        )
+        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
+      )
       : null;
   if (token !== null) {
-    const user: any = jwt_decode(token);
+    const user: any = jwtDecode(token);
     return user;
   } else {
     return;
@@ -38,10 +38,10 @@ export const getCurrentUserFormToken = () => {
 };
 
 const initAuthContextPropsState = {
-  saveAuth: () => {},
-  setCurrentUser: () => {},
+  saveAuth: () => { },
+  setCurrentUser: () => { },
   user: undefined,
-  logout: () => {},
+  logout: () => { },
 };
 
 const AuthContext = createContext<AuthContextProps>(

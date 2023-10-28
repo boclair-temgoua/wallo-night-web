@@ -1,4 +1,5 @@
 // import IPost from '../../schemas/post'
+import { Image } from 'antd'
 import {
   BookmarkIcon,
   EmojiCollection,
@@ -19,7 +20,7 @@ const Post = ({ post }: IProps) => {
       <div className="flex justify-between items-center">
         <div className="flex gap-3 items-center -m-2">
           <div className="w-8 h-8 overflow-hidden rounded-full cursor-pointer">
-            <img className="w-full" src={post.profile} alt={post.profile} />
+            <Image className="w-full" src={post.profile} alt={post.profile} />
           </div>
           <h2 className=" font-semibold">{post.username}</h2>
         </div>
@@ -27,7 +28,7 @@ const Post = ({ post }: IProps) => {
       </div>
       {/* Posted Image */}
       <div className="relative -mx-5 aspect-square overflow-hidden">
-        <img className="w-full" src={post.image} alt={post.username} />
+        <Image className="w-full" src={post.image} alt={post.username} />
       </div>
       {/* Actions */}
       <div className="space-y-2">
