@@ -1,6 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import { ButtonInput } from "@/components/ui/button-input";
 import { LayoutSite } from "@/components/layout-site";
 
 export default function Home() {
@@ -8,6 +6,7 @@ export default function Home() {
 
   return (
     <LayoutSite title="Get Donations, Memberships and Shop Sales. No Fees">
+      <h1>Welcome</h1>
 
 
 
