@@ -11,10 +11,10 @@ const PrivateComponent = (Component: ComponentType) => {
     const { push, pathname } = useRouter();
 
     useEffect(() => {
-      if (!userToken && !isOnline) {
+      if (!isOnline) {
         push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
       }
-    }, [userToken, linkHref, isOnline, pathname, push]);
+    }, [userStorage, linkHref, isOnline, pathname, push]);
 
     return <Component {...props} />;
   };
