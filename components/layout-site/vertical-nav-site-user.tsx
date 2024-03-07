@@ -1,11 +1,6 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { MdImportContacts, MdOutlineEventAvailable } from "react-icons/md";
-import { FaQuestion } from "react-icons/fa";
-import { TbArrowRoundaboutRight } from "react-icons/tb";
 import { useState } from "react";
-import { LiaMoneyBillWaveSolid } from "react-icons/lia";
-import { BiCog } from "react-icons/bi";
 import { SETTINGS_ITEMS } from "../layout-dashboard/vertical-nav-dashboard-user";
 
 export type NavbarProps = {

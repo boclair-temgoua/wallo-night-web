@@ -64,7 +64,7 @@ export const makeApiCall = async ({
     queryParams: queryParams,
   });
 
-  axios.defaults.headers.common["Authorization"] = user ?? {};
+  axios.defaults.withCredentials = true;
   const response = await axios.request({
     method: apiEndpoints[action]?.method,
     withCredentials: true,

@@ -1,8 +1,7 @@
 import Head from "next/head";
-import Main from "./main";
-import { getCurrentUserFormToken, useAuth } from "../util/context-user";
+import { useAuth } from "../util/context-user";
 import { HeaderHorizontalNavSite } from "./header-horizontal-nav-site";
-import { useState } from "react";
+import Main from "./main";
 
 interface IProps {
   title: string;
