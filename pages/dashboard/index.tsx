@@ -1,23 +1,22 @@
-import { PrivateComponent } from "@/components/util/private-component";
+import { useInputState } from "@/components/hooks";
 import LayoutDashboard from "@/components/layout-dashboard";
-import { useEffect, useState } from "react";
-import { Avatar } from "antd";
-import { useRouter } from "next/router";
 import { arrayTransactions } from "@/components/mock";
+import { RecentTransactions } from "@/components/transaction/recent-transactions";
+import { PrivateComponent } from "@/components/util/private-component";
 import { formatePrice } from "@/utils";
+import { AvatarComponent } from "@/utils/avatar-component";
+import { useRouter } from "next/router";
+import { useState } from "react";
 import { BiCog } from "react-icons/bi";
 import { IoShareOutline } from "react-icons/io5";
-import { useAuth } from "@/components/util/context-user";
-import { RecentTransactions } from "@/components/transaction/recent-transactions";
-import { AvatarComponent } from "@/utils/avatar-component";
 
 
 const Dashboard = () => {
-  const user = useAuth() as any;
+  const { userStorage } = useInputState();
   const router = useRouter();
   const [donationsArrays] = useState(arrayTransactions || []);
 
-  console.log('user ========>', user)
+  console.log('user ========>', userStorage)
 
 
 
@@ -36,12 +35,12 @@ const Dashboard = () => {
                   <div className="px-3 py-2 bg-white border border-gray-200 rounded-lg">
                     <div className="flex items-center">
                       <div className="relative flex-shrink-0 cursor-pointer">
-                        <AvatarComponent size={60} profile={user?.profile} />
+                        <AvatarComponent size={60} profile={userStorage?.profile} />
                       </div>
 
                       <div className="ml-4 cursor-pointer">
                         <p className="text-xl font-bold text-gray-900">
-                          {user?.profile?.firstName ?? ''} {user?.profile?.lastName ?? ''}
+                          {userStorage?.profile?.firstName ?? ''} {userStorage?.profile?.lastName ?? ''}
                         </p>
                       </div>
 
@@ -63,7 +62,7 @@ const Dashboard = () => {
 
                     <div className="flex items-center mt-3">
                       <p className="text-3xl font-bold">{formatePrice({
-                        value: Number(user?.wallet?.amount ?? 0),
+                        value: Number(userStorage?.wallet?.amount ?? 0),
                         isDivide: true,
                       }) ?? ""} EUR</p>
                     </div>
@@ -80,7 +79,7 @@ const Dashboard = () => {
                   /> */}
 
 
-                  {user?.id ? <RecentTransactions /> : null}
+                  {userStorage?.id ? <RecentTransactions /> : null}
 
 
                 </div>

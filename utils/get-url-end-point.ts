@@ -124,6 +124,11 @@ export const apiEndpoints: ClientApiMethods = {
     endpoint: `${baseUrl}/users/profile/show/:profileId`,
     method: GET,
   },
+  getOneUserMe: {
+    endpoint: `${baseUrl}/users/me`,
+    method: GET,
+  },
+
   /****************** Comments route */
   getComments: {
     endpoint: `${baseUrl}/comments`,
