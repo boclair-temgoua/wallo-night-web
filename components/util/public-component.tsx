@@ -13,7 +13,7 @@ const PublicComponent = (Component: ComponentType) => {
       if (userToken && isOnline) {
         push(`/dashboard`);
       }
-    }, [isOnline, push, query]);
+    }, [userToken, isOnline, push, query]);
 
     return <Component {...props} />;
   };
