@@ -1,9 +1,9 @@
 import {
-  UserLoginFormModel,
-  UserRegisterFormModel,
   UserForgotPasswordFormModel,
-  UserResetPasswordFormModel,
+  UserLoginFormModel,
   UserModel,
+  UserRegisterFormModel,
+  UserResetPasswordFormModel,
 } from "@/types/user.type";
 import { makeApiCall } from "@/utils/get-url-end-point";
 import { useQuery } from "@tanstack/react-query";
@@ -54,6 +54,35 @@ export const resendCodeAPI = async (payload: {
     action: "resendCode",
     urlParams: { userId },
   });
+};
+
+export const GetOneUserMeAPI = () => {
+  const { data, isError, isLoading, status, isPending, refetch } = useQuery({
+    queryKey: ["user"],
+    queryFn: async () =>
+      await makeApiCall({
+        action: "getOneUserMe",
+      }),
+    staleTime: 60_000,
+    refetchOnWindowFocus: false,
+  });
+
+  return {
+    data: data?.data as UserModel,
+    isError,
+    isLoading,
+    status,
+    isPending,
+    refetch,
+  };
+};
+
+export const logoutUsersAPI = async (): Promise<any> => {
+  try {
+    return await makeApiCall({
+      action: "logoutUsers",
+    });
+  } catch (error) {}
 };
 
 export const GetOneUserPrivateAPI = (payload: { userId: string }) => {

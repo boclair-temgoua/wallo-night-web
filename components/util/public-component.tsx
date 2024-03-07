@@ -1,26 +1,19 @@
-import { useRouter } from "next/router";
-import { ComponentType, useEffect } from "react";
+import { useRouter } from 'next/router';
+import { ComponentType, useEffect } from 'react';
+import { getCookieUser, useAuth } from './context-user';
 
 const PublicComponent = (Component: ComponentType) => {
+  const userToken = getCookieUser();
   return function ProtectedRoute({ ...props }) {
-    const router = useRouter();
-    const user =
-      typeof window !== "undefined"
-        ? JSON.parse(
-            String(
-              localStorage.getItem(
-                String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
-              )
-            )
-          )
-        : null;
-    const userIsAuthenticated = user !== null;
+    const { userStorage } = useAuth() as any;
+    const isOnline = userStorage?.id !== undefined;
+    const { push } = useRouter();
 
     useEffect(() => {
-      if (userIsAuthenticated) {
-        router.push("/");
+      if (userToken && isOnline) {
+        push(`/dashboard`);
       }
-    }, [userIsAuthenticated, router]);
+    }, [userToken, isOnline]);
 
     return <Component {...props} />;
   };

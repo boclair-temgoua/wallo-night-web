@@ -95,11 +95,10 @@ export const GetInfiniteOrderEventsAPI = (payload: {
   status?: string;
   sort: SortModel;
   typeIds?: string[];
-  queryKey: string[];
 }) => {
-  const { organizationId, userId, take, sort, status, queryKey } = payload;
+  const { organizationId, userId, take, sort, status } = payload;
   return useInfiniteQuery({
-    queryKey: queryKey,
+    queryKey: ["order-events", "infinite"],
     getNextPageParam: (lastPage: any) => lastPage.data.next_page,
     queryFn: async ({ pageParam = 1 }) =>
       await getOrderEventsAPI({

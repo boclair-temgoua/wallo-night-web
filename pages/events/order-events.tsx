@@ -1,15 +1,15 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
-import { useRouter } from "next/router";
-import { useInView } from "react-intersection-observer";
-import { useAuth } from "@/components/util/context-user";
-import { LoadingFile } from "@/components/ui/loading-file";
 import { GetInfiniteOrderEventsAPI, GetOneOrderEventAPI } from "@/api-site/order-event";
-import { useQrcodeScanner } from "@/components/hooks/use-qrcode-scanner ";
 import { HorizontalNavEvent } from "@/components/event/horizontal-nav-event";
-import { ButtonInput, EmptyData } from "@/components/ui";
+import { useQrcodeScanner } from "@/components/hooks/use-qrcode-scanner ";
+import LayoutDashboard from "@/components/layout-dashboard";
 import { ListOrderEvents } from "@/components/order-event/list-order-events";
+import { ButtonInput, EmptyData } from "@/components/ui";
+import { LoadingFile } from "@/components/ui/loading-file";
+import { useAuth } from "@/components/util/context-user";
+import { PrivateComponent } from "@/components/util/private-component";
+import { useRouter } from "next/router";
 import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
 const EventOrderEvents = () => {
   const { ref, inView } = useInView();
@@ -45,7 +45,6 @@ const EventOrderEvents = () => {
     organizationId: userStorage?.organizationId,
     take: 10,
     sort: "DESC",
-    queryKey: ["order-events", "infinite"],
   });
 
   useEffect(() => {

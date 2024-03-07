@@ -1,14 +1,14 @@
-import { PrivateComponent } from "@/components/util/private-component";
-import LayoutDashboard from "@/components/layout-dashboard";
-import { useRouter } from "next/router";
-import { useInView } from "react-intersection-observer";
-import { useAuth } from "@/components/util/context-user";
-import { useEffect } from "react";
-import { EmptyData } from "@/components/ui/empty-data";
-import { ButtonInput } from "@/components/ui/button-input";
-import { LoadingFile } from "@/components/ui/loading-file";
 import { GetInfiniteOrderEventsAPI } from "@/api-site/order-event";
+import LayoutDashboard from "@/components/layout-dashboard";
 import { ListOrderEvents } from "@/components/order-event/list-order-events";
+import { ButtonInput } from "@/components/ui/button-input";
+import { EmptyData } from "@/components/ui/empty-data";
+import { LoadingFile } from "@/components/ui/loading-file";
+import { useAuth } from "@/components/util/context-user";
+import { PrivateComponent } from "@/components/util/private-component";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
+import { useInView } from "react-intersection-observer";
 
 const OrderEvents = () => {
   const router = useRouter();
@@ -26,7 +26,6 @@ const OrderEvents = () => {
     userId: userStorage?.id,
     take: 10,
     sort: "DESC",
-    queryKey: ["order-events", "infinite"],
   });
 
   useEffect(() => {

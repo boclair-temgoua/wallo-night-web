@@ -1,79 +1,51 @@
-import {
-  FC,
-  useState,
-  createContext,
-  useContext,
-  Dispatch,
-  SetStateAction,
-  ReactNode,
-} from "react";
-import { UserModel } from "@/types/user.type";
-import { useQuery } from "@tanstack/react-query";
-import { GetOneUserPrivateAPI } from "@/api-site/user";
-import { jwtDecode } from "jwt-decode";
-import { Spin } from "antd";
-import { LoadingOutlined } from "@ant-design/icons";
-import { LoadingFile } from "@/components/ui/loading-file";
+import { GetOneUserMeAPI, logoutUsersAPI } from '@/api-site/user';
+import { UserModel } from '@/types/user.type';
+import Cookies from 'js-cookie';
+import { FC, ReactNode, createContext, useContext } from 'react';
 
 type AuthContextProps = {
-  user: UserModel | undefined;
-  userStorage: any;
-  setCurrentUser: Dispatch<SetStateAction<UserModel | undefined>>;
-  logout: () => void;
-};
-
-export const getCurrentUserFormToken = () => {
-  const token =
-    typeof window !== "undefined"
-      ? window.localStorage.getItem(
-        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
-      )
-      : null;
-  if (token !== null) {
-    const user: any = jwtDecode(token);
-    return user;
-  } else {
-    return;
-  }
+  user?: UserModel | undefined;
+  userStorage?: any;
 };
 
 const initAuthContextPropsState = {
-  saveAuth: () => { },
-  setCurrentUser: () => { },
   user: undefined,
-  logout: () => { },
+  userStorage: undefined,
 };
 
 const AuthContext = createContext<AuthContextProps>(
-  initAuthContextPropsState as any
+  initAuthContextPropsState as any,
 );
 
 const useAuth = () => {
   return useContext(AuthContext);
 };
 
+export const logoutUser = () => {
+  Cookies.remove(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN));
+  logoutUsersAPI();
+  location.reload();
+};
+
+export const getCookieUser = () =>
+  typeof window !== 'undefined'
+    ? Cookies.get(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
+    : null;
+
 const ContextUserProvider: FC<{ children?: ReactNode }> = ({ children }) => {
-  const [userStorage, setUserStorage] = useState(getCurrentUserFormToken());
-
-  const { status, data: user } = GetOneUserPrivateAPI({
-    userId: userStorage?.id,
-  });
-
-  const logout = () => {
-    setUserStorage(undefined);
-    window.localStorage.removeItem(
-      String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN)
-    );
-  };
-
-  if (status === "pending") {
-    <LoadingFile />;
-  }
+  const { data: user } = GetOneUserMeAPI();
 
   return (
-    <AuthContext.Provider value={{ ...user, userStorage, logout }}>
-      {children}
-    </AuthContext.Provider>
+    <>
+      <AuthContext.Provider
+        value={{
+          ...(user as any),
+          userStorage: user,
+        }}
+      >
+        {children}
+      </AuthContext.Provider>
+    </>
   );
 };
 
