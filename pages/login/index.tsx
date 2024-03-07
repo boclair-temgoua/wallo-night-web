@@ -1,17 +1,15 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import Link from "next/link";
-import { Alert, Button, Input } from "antd";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { yupResolver } from "@hookform/resolvers/yup";
-import * as yup from "yup";
-import { UserLoginFormModel } from "@/types/user.type";
-import { loginUserAPI, resendCodeAPI } from "../../api-site/user";
-import { AlertDangerNotification } from "@/utils/alert-notification";
-import { useRouter } from "next/router";
-import { PublicComponent } from "@/components/util/public-component";
+import { useReactHookForm } from "@/components/hooks";
 import { LayoutSite } from "@/components/layout-site";
-import { TextInput, TextInputPassword, ButtonInput } from "@/components/ui";
+import { ButtonInput, TextInput, TextInputPassword } from "@/components/ui";
+import { PublicComponent } from "@/components/util/public-component";
+import { UserLoginFormModel } from "@/types/user.type";
+import { AlertDangerNotification } from "@/utils/alert-notification";
+import Link from "next/link";
+import { useRouter } from "next/router";
+import { SubmitHandler } from "react-hook-form";
+import * as yup from "yup";
+import { loginUserAPI } from "../../api-site/user";
 
 const schema = yup.object({
   email: yup
@@ -24,20 +22,19 @@ const schema = yup.object({
 });
 
 const Login = () => {
-  const router = useRouter();
-  const [loading, setLoading] = useState(false);
-  const [hasErrors, setHasErrors] = useState<boolean | string | undefined>(
-    undefined
-  );
+  const { query, push } = useRouter();
+  const { redirect } = query;
   const {
+    watch,
     control,
-    register,
+    setValue,
     handleSubmit,
-    formState: { errors },
-  } = useForm<UserLoginFormModel>({
-    resolver: yupResolver(schema),
-    mode: "onChange",
-  });
+    errors,
+    loading,
+    setLoading,
+    hasErrors,
+    setHasErrors,
+  } = useReactHookForm({ schema });
 
   const onSubmit: SubmitHandler<UserLoginFormModel> = async (
     payload: UserLoginFormModel
@@ -50,18 +47,14 @@ const Login = () => {
       const { data: user } = await loginUserAPI({ email, password });
 
       if (user?.permission === "ADMIN") {
-        router.push(`${`/dashboard`}`)
-        window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+        window.location.href = `${redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/dashboard`
+          }`;
       }
 
       if (user?.permission === "USER") {
-        router.push(`${`/order-events`}`);
-        window.location.href = `${process.env.NEXT_PUBLIC_SITE}/order-events`;
+        window.location.href = `${redirect ? redirect : `${process.env.NEXT_PUBLIC_SITE}/order-events`
+          }`;
       }
-      localStorage.setItem(
-        String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN),
-        JSON.stringify(user?.accessToken)
-      );
       setHasErrors(false);
       setLoading(false);
     } catch (error: any) {

@@ -1,5 +1,5 @@
 import Head from "next/head";
-import { useAuth } from "../util/context-user";
+import { useInputState } from "../hooks";
 import { HeaderHorizontalNavSite } from "./header-horizontal-nav-site";
 import Main from "./main";
 
@@ -9,7 +9,7 @@ interface IProps {
 }
 
 const LayoutSite: React.FC<IProps> = ({ children, title }) => {
-  const user = useAuth() as any;
+  const { userStorage } = useInputState();
 
   return (
     <>
@@ -20,7 +20,7 @@ const LayoutSite: React.FC<IProps> = ({ children, title }) => {
       </Head>
 
       {/* <div className="min-h-screen space-y-5"> */}
-      <HeaderHorizontalNavSite user={user} />
+      <HeaderHorizontalNavSite user={userStorage} />
 
       <Main>{children}</Main>
       {/* </div> */}

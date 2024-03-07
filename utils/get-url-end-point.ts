@@ -14,15 +14,6 @@ export type IntegrationApiCall = {
   queryParams?: Object;
 };
 
-const user =
-  typeof window !== "undefined"
-    ? JSON.parse(
-        String(
-          localStorage.getItem(String(process.env.NEXT_PUBLIC_BASE_NAME_TOKEN))
-        )
-      )
-    : null;
-
 export const makeApiCall = async ({
   action,
   body,
