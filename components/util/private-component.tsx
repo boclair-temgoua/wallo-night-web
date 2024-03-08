@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { ComponentType, useEffect } from 'react';
+import { ComponentType } from 'react';
 import { useInputState } from '../hooks';
 import { getCookieUser } from './context-user';
 
@@ -10,11 +10,11 @@ const PrivateComponent = (Component: ComponentType) => {
     const isOnline = userStorage?.id !== undefined;
     const { push, pathname } = useRouter();
 
-    useEffect(() => {
-      if (!isOnline) {
-        push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
-      }
-    }, [userStorage, linkHref, isOnline, pathname, push]);
+    // useEffect(() => {
+    //   if (!isOnline) {
+    //     push(`/login${pathname ? `?redirect=${linkHref}` : ''}`);
+    //   }
+    // }, [userStorage, linkHref, isOnline, pathname, push]);
 
     return <Component {...props} />;
   };

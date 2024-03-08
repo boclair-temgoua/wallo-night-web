@@ -11,17 +11,17 @@ const PublicComponent = (Component: ComponentType) => {
     const { redirect } = query;
 
     useEffect(() => {
-      if (isOnline) {
-        // if (userStorage?.permission === "ADMIN") {
-        //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`;
-        // }
+      // if (isOnline) {
+      //   // if (userStorage?.permission === "ADMIN") {
+      //   //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/dashboard`;
+      //   // }
 
-        // if (userStorage?.permission === "USER") {
-        //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/order-events`;
-        // }
+      //   // if (userStorage?.permission === "USER") {
+      //   //   window.location.href = `${process.env.NEXT_PUBLIC_SITE}/order-events`;
+      //   // }
 
-        push(`/dashboard`);
-      }
+      //   push(`/dashboard`);
+      // }
     }, [userStorage, isOnline, push, query]);
 
     return <Component {...props} />;
